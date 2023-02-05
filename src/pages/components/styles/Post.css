@@ -1,0 +1,17 @@
+.Post {
+  background-color: #3c3c3c;
+  padding: 10px 20px;
+  margin: 0 0 20px 0;
+}
+
+.Post .postTitle h2 {
+  margin-bottom: 0;
+}
+
+.Post .postInfo {
+  display: flex;
+}
+  .Post .postInfo > * {
+    color: #808080;
+    margin-right: .5rem;;
+  }

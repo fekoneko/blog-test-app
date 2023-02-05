@@ -1,0 +1,9 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  min-width: 400px;
+}
+
+.App > * {
+  padding-inline: 15%;
+}
