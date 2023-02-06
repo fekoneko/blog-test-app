@@ -1,3 +1,11 @@
-.PostPage {
-  
+.PostPage .postTitle {
+  margin-bottom: 0;
 }
+
+.PostPage .postInfo {
+  display: flex;
+}
+  .PostPage .postInfo > * {
+    color: #808080;
+    margin-right: .5rem;;
+  }

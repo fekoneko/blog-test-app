@@ -12,5 +12,8 @@
   transition: background-color .2s ease-in-out;
 }
   .Nav a:hover {
+    background-color: #565656;
+  }
+  .Nav a.active {
     background-color: #479aff;
   }

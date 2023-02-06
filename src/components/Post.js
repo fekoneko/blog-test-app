@@ -2,7 +2,7 @@ import './styles/Post.css';
 import { Link } from 'react-router-dom';
 
 const Post = ({ post }) => {
-  const publishDate = new Date(post.publishDate);
+  const publishDateObject = new Date(post.publishDate);
 
   return (
     <article className="Post" id={`post${post.id}`}>
@@ -17,7 +17,7 @@ const Post = ({ post }) => {
           {post.author}
         </Link>
         <Link to={`/search/date?s=${post.publishDate}`}>
-          {publishDate.toDateString()}
+          {publishDateObject.toDateString()}
         </Link>
       </div>
       <p className="postContent">{

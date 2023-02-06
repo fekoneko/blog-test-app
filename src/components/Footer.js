@@ -3,7 +3,7 @@ import './styles/Footer.css';
 const Footer = () => {
   const today = new Date();
   return (
-    <footer className= "Footer">
+    <footer className= "Footer" role="contentinfo">
       fekoneko, { today.getFullYear() }
     </footer>
   );

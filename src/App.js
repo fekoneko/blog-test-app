@@ -1,14 +1,14 @@
 import './styles/App.css';
-import { Route, Routes } from 'react-router-dom';
-import Header from './Header';
-import Nav from './Nav';
-import Footer from './Footer';
+import { Route, Routes, useLocation } from 'react-router-dom';
+import { useState } from 'react';
+import Header from './components/Header';
+import Nav from './components/Nav';
+import Footer from './components/Footer';
 import Home from './pages/Home';
 import CreatePost from './pages/CreatePost';
 import PostPage from './pages/PostPage';
 import About from './pages/About';
 import Missing from './pages/Missing';
-import { useState } from 'react';
 
 function App() {
   const [posts, setPosts] = useState([
@@ -35,10 +35,21 @@ function App() {
     },
   ]);
 
+  const [searchRequest, setSearchRequest] = useState('');
+
+  const handleSearch = (request) => {
+    setSearchRequest(request);
+  }
+
+  const location = useLocation();
+
   return (
     <div className="App">
-      <Header />
-      <Nav />
+      <Header
+        searchRequest={searchRequest}
+        handleSearch={handleSearch}
+      />
+      <Nav location={location} />
       <Routes>
         <Route path="" element={
           <Home posts={posts} />
@@ -47,7 +58,7 @@ function App() {
           <CreatePost />
         } />
         <Route path="post/:id" element={
-          <PostPage posts={posts} />
+          <PostPage posts={ posts } />
         } />
         <Route path="about" element={
           <About />
