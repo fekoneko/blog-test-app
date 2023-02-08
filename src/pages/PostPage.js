@@ -9,17 +9,17 @@ const PostPage = ({ posts }) => {
     <Missing />
   );
 
-  const publishDateObject = new Date(post.publishDate);
+  const postDate = new Date(post.publishTime);
 
   return (
     <main className="PostPage" role="main">
       <h2 className="postTitle">{post.title}</h2>
       <div className="postInfo">
-        <Link to={`/search/author?s=${post.author}`}>
+        <Link to={`/?s=${post.author}`}>
           {post.author}
         </Link>
-        <Link to={`/search/date?s=${post.publishDate}`}>
-          {publishDateObject.toDateString()}
+        <Link to={`/?s=${postDate.toDateString()}`}>
+          {postDate.toDateString()}
         </Link>
       </div>
       <p className="postContent">{post.content}</p>

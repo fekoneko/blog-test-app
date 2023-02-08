@@ -1,0 +1,47 @@
+.CreatePostForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.CreatePostForm input[type="text"],
+.CreatePostForm textarea,
+.CreatePostForm button[type="submit"] {
+  background-color: #80808000;
+  border: 2px #808080 solid;
+  color: white;
+  margin-block: 10px;
+  padding: 8px 16px;
+}
+  .CreatePostForm input[type="text"]::placeholder,
+  .CreatePostForm textarea::placeholder {
+    color: #808080;
+  }
+
+.CreatePostForm textarea {
+  resize: none;
+  height: 200px;
+}
+
+.CreatePostForm fieldset {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+  .CreatePostForm fieldset > label {
+    max-width: 20%;
+  }
+  .CreatePostForm fieldset > * {
+    flex-grow: 1;
+  }
+
+.CreatePostForm button[type="submit"] {
+  transition: background-color .2s ease-in-out,
+    border-color .2s ease-in-out;
+}
+  .CreatePostForm button[type="submit"]:hover {
+    background-color: #479aff;
+    border-color: #479aff;
+  }
