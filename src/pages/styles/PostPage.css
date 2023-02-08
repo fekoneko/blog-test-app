@@ -1,11 +1,8 @@
 .PostPage .postTitle {
   margin-bottom: 0;
+  word-wrap: break-word;
 }
 
-.PostPage .postInfo {
-  display: flex;
+.PostPage .postContent {
+  word-wrap: break-word;
 }
-  .PostPage .postInfo > * {
-    color: #808080;
-    margin-right: .5rem;;
-  }

@@ -1,12 +1,8 @@
 import './styles/CreatePostForm.css'
 import { useState } from 'react';
 
-const CreatePostForm = ({ handleCreatePost }) => {
-  const [newPost, setNewPost] = useState({
-    title: '',
-    content: '',
-    author: '',
-  });
+const CreatePostForm = ({ handleCreatePost, initPost }) => {
+  const [newPost, setNewPost] = useState(initPost);
 
   return (
     <form className="CreatePostForm" onSubmit={ (e) => {
@@ -53,4 +49,15 @@ const CreatePostForm = ({ handleCreatePost }) => {
     </form>
   );
 }
+
+CreatePostForm.defaultProps = {
+  initPost: {
+    id: null,
+    title: '',
+    content: '',
+    author: '',
+    publichTime: null,
+  },
+}
+
 export default CreatePostForm;

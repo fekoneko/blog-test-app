@@ -1,8 +1,9 @@
 import './styles/PostPage.css';
+import { BsTrashFill, BsPencilFill } from "react-icons/bs";
 import { Link, useParams } from 'react-router-dom';
 import Missing from './Missing';
 
-const PostPage = ({ posts }) => {
+const PostPage = ({ posts, handleEdit, handleDelete }) => {
   const { id } = useParams();
   const post = posts.find((p) => p.id.toString() === id);
   if (!post) return (
@@ -21,6 +22,10 @@ const PostPage = ({ posts }) => {
         <Link to={`/?s=${postDate.toDateString()}`}>
           {postDate.toDateString()}
         </Link>
+        <div className="postControls">
+          <button onClick={() => handleEdit(post.id)}><BsPencilFill /></button>
+          <button onClick={() => handleDelete(post.id)}><BsTrashFill /></button>
+      </div>
       </div>
       <p className="postContent">{post.content}</p>
     </main>

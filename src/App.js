@@ -10,6 +10,7 @@ import CreatePost from './pages/CreatePost';
 import PostPage from './pages/PostPage';
 import About from './pages/About';
 import Missing from './pages/Missing';
+import EditPost from './pages/EditPost';
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -33,7 +34,7 @@ function App() {
       console.log('Post Upload Error!'); // TODO: Display error on page
       return false;
     }
-    updatePosts();
+    await updatePosts();
     return true;
   }
 
@@ -43,7 +44,7 @@ function App() {
       console.log('Post Upload Error!'); // TODO: Display error on page
       return false;
     }
-    updatePosts();
+    await updatePosts();
     return true;
   }
 
@@ -53,7 +54,7 @@ function App() {
       console.log('Post Upload Error!'); // TODO: Display error on page
       return false;
     }
-    updatePosts();
+    await updatePosts();
     return true;
   }
 
@@ -114,6 +115,14 @@ function App() {
     if (await uploadPost(post)) navigate('/');
   }
 
+  const handleEdit = async (post, id) => {
+    if (await editPost(post, id)) navigate(`/post/${id}`);
+  }
+
+  const handleDelete = async (id) => {
+    if (await deletePost(id)) navigate('/');
+  }
+
   return (
     <div className="App">
       <Header
@@ -123,13 +132,27 @@ function App() {
       <Nav location={location} />
       <Routes>
         <Route path="" element={
-          <Home posts={displayedPosts} />
+          <Home
+            posts={displayedPosts}
+            handleEdit={(id) => navigate(`edit/${id}`)}
+            handleDelete={handleDelete}
+          />
         } />
         <Route path="post" element={
           <CreatePost handleCreatePost={handleCreatePost} />
         } />
         <Route path="post/:id" element={
-          <PostPage posts={ posts } />
+          <PostPage
+            posts={ posts }
+            handleEdit={(id) => navigate(`edit/${id}`)}
+            handleDelete={handleDelete}
+          />
+        } />
+        <Route path="edit/:id" element={
+          <EditPost
+            posts={ posts }
+            handleEdit={handleEdit}
+          />
         } />
         <Route path="about" element={
           <About />

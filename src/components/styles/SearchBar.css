@@ -26,6 +26,7 @@
   padding: 0;
   transition: background-color .2s ease-in-out,
     color .2s ease-in-out,
+    opacity .2s ease-in-out,
     border-color .2s ease-in-out;
 }
   .SearchBar .clearButton svg {
@@ -37,7 +38,5 @@
     color: #479aff;
   }
   .SearchBar .clearButton.hidden {
-    background-color: transparent;
-    color: transparent;
-    border-color: transparent;
+    opacity: 0;
   }

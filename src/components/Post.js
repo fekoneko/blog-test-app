@@ -1,7 +1,8 @@
 import './styles/Post.css';
+import { BsTrashFill, BsPencilFill } from "react-icons/bs";
 import { Link } from 'react-router-dom';
 
-const Post = ({ post }) => {
+const Post = ({ post, handleEdit, handleDelete }) => {
   const postDate = new Date(post.publishTime);
 
   return (
@@ -25,6 +26,10 @@ const Post = ({ post }) => {
           ? post.content
           : `${post.content.slice(0, 128)}...`
       }</p>
+      <div className="postControls">
+        <button onClick={() => handleEdit(post.id)}><BsPencilFill /></button>
+        <button onClick={() => handleDelete(post.id)}><BsTrashFill /></button>
+      </div>
     </article>
   );
 }
