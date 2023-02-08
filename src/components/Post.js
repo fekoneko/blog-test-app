@@ -21,7 +21,7 @@ const Post = ({ post }) => {
         </Link>
       </div>
       <p className="postContent">{
-        post.content <= 128
+        post.content.length <= 128
           ? post.content
           : `${post.content.slice(0, 128)}...`
       }</p>

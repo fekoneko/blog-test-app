@@ -3,15 +3,16 @@ import { useState } from 'react';
 
 const CreatePostForm = ({ handleCreatePost }) => {
   const [newPost, setNewPost] = useState({
-    id: null,
     title: '',
     content: '',
     author: '',
-    publishTime: null,
   });
 
   return (
-    <form className="CreatePostForm" onSubmit={ () => { handleCreatePost(newPost) }}>
+    <form className="CreatePostForm" onSubmit={ (e) => {
+      e.preventDefault();
+      handleCreatePost(newPost);
+    }}>
       <fieldset>
         <label htmlFor="postTitleInput">Title:</label>
         <input

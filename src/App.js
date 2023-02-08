@@ -1,6 +1,7 @@
 import './styles/App.css';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { POSTS_API_NAME, apiGet, apiPost, apiDelete, apiPatch } from './scripts/api'
 import Header from './components/Header';
 import Nav from './components/Nav';
 import Footer from './components/Footer';
@@ -11,31 +12,54 @@ import About from './pages/About';
 import Missing from './pages/Missing';
 
 function App() {
-  const [posts, setPosts] = useState([
-    {
-      id: 1,
-      title: 'Test Post 1',
-      content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis dolore cum maxime explicabo soluta porro dignissimos illo commodi unde consectetur laboriosam possimus veritatis, necessitatibus dolores doloribus reiciendis incidunt suscipit quisquam.',
-      author: 'fekoneko',
-      publishTime: 0,
-    },
-    {
-      id: 2,
-      title: 'Test Post 2',
-      content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis dolore cum maxime explicabo soluta porro dignissimos illo commodi unde consectetur laboriosam possimus veritatis, necessitatibus dolores doloribus reiciendis incidunt suscipit quisquam.',
-      author: 'fekoneko',
-      publishTime: 0,
-    },
-    {
-      id: 3,
-      title: 'Test Post 3',
-      content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis dolore cum maxime explicabo soluta porro dignissimos illo commodi unde consectetur laboriosam possimus veritatis, necessitatibus dolores doloribus reiciendis incidunt suscipit quisquam.',
-      author: 'fekoneko',
-      publishTime: 0,
-    },
-  ]);
+  const [posts, setPosts] = useState([]);
 
   const [displayedPosts, setDisplayedPosts] = useState(posts);
+
+  const updatePosts = async () => {
+    const result = await apiGet(POSTS_API_NAME);
+    if (result === null) {
+      console.log('Post Load Error!'); // TODO: Display error on page
+      return false;
+    } 
+    setPosts(result);
+    return true;
+  }
+
+  const uploadPost = async (post) => {
+    delete post.id;
+    const result = await apiPost(POSTS_API_NAME, post);
+    if (result === null) {
+      console.log('Post Upload Error!'); // TODO: Display error on page
+      return false;
+    }
+    updatePosts();
+    return true;
+  }
+
+  const deletePost = async (id) => {
+    const result = await apiDelete(POSTS_API_NAME, id);
+    if (result === null) {
+      console.log('Post Upload Error!'); // TODO: Display error on page
+      return false;
+    }
+    updatePosts();
+    return true;
+  }
+
+  const editPost = async (post, id) => {
+    const result = await apiPatch(POSTS_API_NAME, post, id);
+    if (result === null) {
+      console.log('Post Upload Error!'); // TODO: Display error on page
+      return false;
+    }
+    updatePosts();
+    return true;
+  }
+
+  useEffect(() => {
+    updatePosts();
+  }, []);
 
   const [searchRequest, setSearchRequest] = useState('');
 
@@ -81,22 +105,13 @@ function App() {
     if (searchRequest.replace(/\s+$/, '') !== params.get('s')) setSearchRequest(params.get('s'));
   }, [location.search, searchRequest]);
 
-  const serverAddPost = (newPost) => {
-    // Must give newPost available ID at server and return it
-    // RequestId() or something
-    return posts[posts.length - 1].id + 1; // Just a placeholder
-  }
-
-  const handleCreatePost = (newPost) => {
+  const handleCreatePost = async (post) => {
     const date = new Date();
-    if (!newPost.content) return; // Required
-    if (!newPost.title) newPost.title = 'Untitled';
-    if (!newPost.author) newPost.author = 'Unknown';
-    newPost.publishTime = date.valueOf();
-    newPost.id = serverAddPost(newPost);
-    if (!newPost.id) return;
-    setPosts(posts.concat(newPost));
-    navigate('/');
+    if (!post.content) return;
+    if (!post.title) post.title = 'Untitled';
+    if (!post.author) post.author = 'Unknown';
+    post.publishTime = date.valueOf();
+    if (await uploadPost(post)) navigate('/');
   }
 
   return (
