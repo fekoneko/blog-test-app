@@ -1,4 +1,4 @@
-# blog-test-app
+# fekoneko blog
 My second React project. This time it's a blog site :)
 
 ## Functions available at the moment:
