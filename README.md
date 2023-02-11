@@ -1,9 +1,14 @@
 # blog-test-app
 My second React project. This time it's a blog site :)
 
+## Functions available at the moment:
+* Creating/deleting posts
+* Viewing/editing posts
+* Search
+
 ## Important!
 I used `json-server` to test this application. So make sure you run it as well as `npm start`
-* use `npx json-server -p 3500 -w json-server-data/db.json` you may choose your own location as the last attribute
+* use `npx json-server -p 3500 -w json-server-data/db.json` you may choose your own location as the last argument
 * get started with this db.json:
 ```json
 {
