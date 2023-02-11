@@ -4,7 +4,7 @@
 }
 
 .SearchBar input[type="text"] {
-  width: calc(100% - 32px - 12px);
+  width: calc(100% + 12px);
   padding: 8px 32px 8px 16px;
   border: 2px white solid;
   background-color: transparent;
