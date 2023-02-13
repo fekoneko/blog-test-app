@@ -1,5 +1,5 @@
 import { PostInterface } from '../scripts/interfaces';
-import CreatePostForm from '../components/CreatePostForm';
+import EditPostForm from '../components/EditPostForm';
 
 const CreatePost = (props: {
   handleCreatePost: (post: PostInterface) => any;
@@ -7,7 +7,7 @@ const CreatePost = (props: {
   return (
     <main className="CreatePost" role="main">
       <h1>Create Post</h1>
-      <CreatePostForm handleCreatePost={props.handleCreatePost} />
+      <EditPostForm handleCreatePost={props.handleCreatePost} />
     </main>
   );
 };

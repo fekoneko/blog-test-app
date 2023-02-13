@@ -49,7 +49,7 @@ const Post = (props: {
 };
 Post.defaultProps = {
   post: {
-    id: NaN,
+    id: undefined,
     title: '',
     content: '',
     author: '',

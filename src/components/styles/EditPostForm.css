@@ -1,28 +1,28 @@
-.CreatePostForm {
+.EditPostForm {
   display: flex;
   flex-direction: column;
 }
 
-.CreatePostForm input[type='text'],
-.CreatePostForm textarea,
-.CreatePostForm button[type='submit'] {
+.EditPostForm input[type='text'],
+.EditPostForm textarea,
+.EditPostForm button[type='submit'] {
   background-color: #80808000;
   border: 2px #808080 solid;
   color: white;
   margin-block: 10px;
   padding: 8px 16px;
 }
-.CreatePostForm input[type='text']::placeholder,
-.CreatePostForm textarea::placeholder {
+.EditPostForm input[type='text']::placeholder,
+.EditPostForm textarea::placeholder {
   color: #808080;
 }
 
-.CreatePostForm textarea {
+.EditPostForm textarea {
   resize: none;
   height: 200px;
 }
 
-.CreatePostForm fieldset {
+.EditPostForm fieldset {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,18 +30,18 @@
   margin: 0;
   border: none;
 }
-.CreatePostForm fieldset > label {
+.EditPostForm fieldset > label {
   max-width: 20%;
 }
-.CreatePostForm fieldset > * {
+.EditPostForm fieldset > * {
   flex-grow: 1;
 }
 
-.CreatePostForm button[type='submit'] {
+.EditPostForm button[type='submit'] {
   transition: background-color 0.2s ease-in-out,
     border-color 0.2s ease-in-out;
 }
-.CreatePostForm button[type='submit']:hover {
+.EditPostForm button[type='submit']:hover {
   background-color: #479aff;
   border-color: #479aff;
 }

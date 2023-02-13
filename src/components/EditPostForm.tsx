@@ -1,8 +1,8 @@
-import './styles/CreatePostForm.css';
+import './styles/EditPostForm.css';
 import { PostInterface } from '../scripts/interfaces';
 import { useState } from 'react';
 
-const CreatePostForm = (props: {
+const EditPostForm = (props: {
   handleCreatePost: (post: PostInterface) => any;
   initPost: PostInterface;
 }) => {
@@ -10,7 +10,7 @@ const CreatePostForm = (props: {
 
   return (
     <form
-      className="CreatePostForm"
+      className="EditPostForm"
       onSubmit={(e) => {
         e.preventDefault();
         props.handleCreatePost(newPost);
@@ -64,14 +64,14 @@ const CreatePostForm = (props: {
   );
 };
 
-CreatePostForm.defaultProps = {
+EditPostForm.defaultProps = {
   initPost: {
-    id: null,
+    id: undefined,
     title: '',
     content: '',
     author: '',
-    publichTime: null
+    publichTime: 0
   }
 };
 
-export default CreatePostForm;
+export default EditPostForm;

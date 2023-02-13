@@ -8,16 +8,13 @@ import {
 } from 'react-router-dom';
 import App from './App';
 
-const rootElement = document.getElementById('root');
-if (rootElement) {
-  const root = ReactDOM.createRoot(rootElement);
-  root.render(
-    <StrictMode>
-      <Router>
-        <Routes>
-          <Route path="/*" element={<App />} />
-        </Routes>
-      </Router>
-    </StrictMode>
-  );
-}
+const root = ReactDOM.createRoot(document.getElementById('root')!);
+root.render(
+  <StrictMode>
+    <Router>
+      <Routes>
+        <Route path="/*" element={<App />} />
+      </Routes>
+    </Router>
+  </StrictMode>
+);

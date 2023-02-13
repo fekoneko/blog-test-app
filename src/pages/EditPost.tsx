@@ -1,7 +1,7 @@
 import './styles/EditPost.css';
 import { useParams } from 'react-router-dom';
 import Missing from './Missing';
-import CreatePostForm from '../components/CreatePostForm';
+import EditPostForm from '../components/EditPostForm';
 import { PostInterface } from '../scripts/interfaces';
 
 const EditPost = (props: {
@@ -15,7 +15,7 @@ const EditPost = (props: {
   return (
     <main className="EditPost" role="main">
       <h1>Edit Post</h1>
-      <CreatePostForm
+      <EditPostForm
         handleCreatePost={(post) => {
           if (id) props.handleEdit(post, +id);
         }}
