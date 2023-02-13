@@ -2,8 +2,8 @@ import './styles/Header.css';
 import SearchBar from './SearchBar';
 
 const Header = (props: {
-  searchRequest: string,
-  handleSearch: (request: string) => any,
+  searchRequest: string;
+  handleSearch: (request: string) => any;
 }) => {
   return (
     <header className="Header">
@@ -14,6 +14,6 @@ const Header = (props: {
       />
     </header>
   );
-}
+};
 
 export default Header;

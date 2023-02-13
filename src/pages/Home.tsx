@@ -1,11 +1,10 @@
-import './styles/Home.css';
 import Feed from '../components/Feed';
 import { PostInterface } from '../scripts/interfaces';
 
 const Home = (props: {
-  posts: PostInterface[],
-  handleEdit: (id: number) => any,
-  handleDelete: (id: number) => any,
+  posts: PostInterface[];
+  handleEdit: (id: number) => any;
+  handleDelete: (id: number) => any;
 }) => {
   return (
     <main className="Home" role="main">
@@ -17,6 +16,6 @@ const Home = (props: {
       />
     </main>
   );
-}
+};
 
 export default Home;

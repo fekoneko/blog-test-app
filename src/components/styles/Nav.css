@@ -5,15 +5,15 @@
 }
 
 .Nav a {
-  color:white;
+  color: white;
   flex-grow: 1;
   text-align: center;
   padding: 5px;
-  transition: background-color .2s ease-in-out;
+  transition: background-color 0.2s ease-in-out;
 }
-  .Nav a:hover {
-    background-color: #565656;
-  }
-  .Nav a.active {
-    background-color: #479aff;
-  }
+.Nav a:hover {
+  background-color: #565656;
+}
+.Nav a.active {
+  background-color: #479aff;
+}
