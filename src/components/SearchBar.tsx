@@ -2,8 +2,11 @@ import './styles/SearchBar.css';
 import { BsX } from "react-icons/bs";
 import { useRef } from 'react';
 
-const SearchBar = ({ searchRequest, handleSearch }) => {
-  const searchInputRef = useRef();
+const SearchBar = (props: {
+  searchRequest: string,
+  handleSearch: (request: string) => any,
+}) => {
+  const searchInputRef = useRef<HTMLInputElement>(null);
 
   return (
     <form className="SearchBar" onSubmit={(e) => e.preventDefault()}>
@@ -14,17 +17,20 @@ const SearchBar = ({ searchRequest, handleSearch }) => {
       <input
         id="search"
         ref={searchInputRef}
-        maxLength="256"
+        maxLength={256}
         type="text"
         role="search"
         placeholder="Search"
-        onChange={(e) => handleSearch(e.target.value)}
-        value={searchRequest}
+        onChange={(e) => props.handleSearch(e.target.value)}
+        value={props.searchRequest}
       />
       <button
-        className={'clearButton' + (searchRequest ? '' : ' hidden')}
+        className={'clearButton' + (props.searchRequest ? '' : ' hidden')}
         type="button"
-        onClick={ () => { handleSearch(''); searchInputRef.current.focus(); } }
+        onClick={ () => {
+          props.handleSearch('');
+          if (searchInputRef.current) searchInputRef.current.focus();
+        } }
       ><BsX /></button>
     </form>
   );

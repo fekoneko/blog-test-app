@@ -1,7 +1,8 @@
 import './styles/App.css';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { POSTS_API_NAME, apiGet, apiPost, apiDelete, apiPatch } from './scripts/api'
+import { POSTS_API_NAME, apiGet, apiPost, apiDelete, apiPatch } from './scripts/api';
+import { PostInterface } from './scripts/interfaces';
 import Header from './components/Header';
 import Nav from './components/Nav';
 import Footer from './components/Footer';
@@ -13,9 +14,9 @@ import Missing from './pages/Missing';
 import EditPost from './pages/EditPost';
 
 function App() {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState<PostInterface[]>([]);
 
-  const [displayedPosts, setDisplayedPosts] = useState(posts);
+  const [displayedPosts, setDisplayedPosts] = useState<PostInterface[]>(posts);
 
   const updatePosts = async () => {
     const result = await apiGet(POSTS_API_NAME);
@@ -27,7 +28,7 @@ function App() {
     return true;
   }
 
-  const uploadPost = async (post) => {
+  const uploadPost = async (post: PostInterface) => {
     delete post.id;
     const result = await apiPost(POSTS_API_NAME, post);
     if (result === null) {
@@ -38,7 +39,7 @@ function App() {
     return true;
   }
 
-  const deletePost = async (id) => {
+  const deletePost = async (id: number) => {
     const result = await apiDelete(POSTS_API_NAME, id);
     if (result === null) {
       console.log('Post Upload Error!'); // TODO: Display error on page
@@ -48,7 +49,7 @@ function App() {
     return true;
   }
 
-  const editPost = async (post, id) => {
+  const editPost = async (post: PostInterface, id: number) => {
     const result = await apiPatch(POSTS_API_NAME, post, id);
     if (result === null) {
       console.log('Post Upload Error!'); // TODO: Display error on page
@@ -62,9 +63,9 @@ function App() {
     updatePosts();
   }, []);
 
-  const [searchRequest, setSearchRequest] = useState('');
+  const [searchRequest, setSearchRequest] = useState<string>('');
 
-  const handleSearch = (request) => {
+  const handleSearch = (request: string) => {
     request = request.replace('&', '').replace('#', '').replace('%', '');
     setSearchRequest(request); // Needed because in query params spaces are trimmed
     if (request.replace(/\s+$/, '')) navigate(`/?s=${request}`);
@@ -76,7 +77,7 @@ function App() {
       setDisplayedPosts(posts);
       return;
     }
-    const result = posts.filter((post) => (
+    const result = posts.filter((post: PostInterface) => (
       searchRequest.split(',').map((requestPartFull) => {
         const requestPart = requestPartFull.trim();
         const requestPartLowercase = requestPart.toLowerCase();
@@ -103,10 +104,13 @@ function App() {
       return;
     }
     const params = new URLSearchParams(location.search);
-    if (searchRequest.replace(/\s+$/, '') !== params.get('s')) setSearchRequest(params.get('s'));
+    const searchParam = params.get('s');
+    if (searchParam != null && searchRequest.replace(/\s+$/, '') !== searchParam) {
+      setSearchRequest(searchParam);
+    }
   }, [location.search, searchRequest]);
 
-  const handleCreatePost = async (post) => {
+  const handleCreatePost = async (post: PostInterface) => {
     const date = new Date();
     if (!post.content) return;
     if (!post.title) post.title = 'Untitled';
@@ -115,11 +119,11 @@ function App() {
     if (await uploadPost(post)) navigate('/');
   }
 
-  const handleEdit = async (post, id) => {
+  const handleEdit = async (post: PostInterface, id: number) => {
     if (await editPost(post, id)) navigate(`/post/${id}`);
   }
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (id: number) => {
     if (await deletePost(id)) navigate('/');
   }
 
@@ -134,7 +138,7 @@ function App() {
         <Route path="" element={
           <Home
             posts={displayedPosts}
-            handleEdit={(id) => navigate(`edit/${id}`)}
+            handleEdit={(id: number) => navigate(`edit/${id}`)}
             handleDelete={handleDelete}
           />
         } />
@@ -144,7 +148,7 @@ function App() {
         <Route path="post/:id" element={
           <PostPage
             posts={ posts }
-            handleEdit={(id) => navigate(`edit/${id}`)}
+            handleEdit={(id: number) => navigate(`edit/${id}`)}
             handleDelete={handleDelete}
           />
         } />

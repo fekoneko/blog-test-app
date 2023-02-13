@@ -1,13 +1,17 @@
 import './styles/CreatePostForm.css'
+import { PostInterface } from '../scripts/interfaces';
 import { useState } from 'react';
 
-const CreatePostForm = ({ handleCreatePost, initPost }) => {
-  const [newPost, setNewPost] = useState(initPost);
+const CreatePostForm = (props: {
+  handleCreatePost: (post: PostInterface) => any,
+  initPost: PostInterface,
+}) => {
+  const [newPost, setNewPost] = useState(props.initPost);
 
   return (
     <form className="CreatePostForm" onSubmit={ (e) => {
       e.preventDefault();
-      handleCreatePost(newPost);
+      props.handleCreatePost(newPost);
     }}>
       <fieldset>
         <label htmlFor="postTitleInput">Title:</label>
@@ -15,7 +19,7 @@ const CreatePostForm = ({ handleCreatePost, initPost }) => {
           id="postTitleInput"
           type="text"
           autoFocus
-          maxLength="256"
+          maxLength={256}
           placeholder="What is your post about?"
           onChange={ (e) => setNewPost({ ...newPost, title: e.target.value }) }
           value={newPost.title}
@@ -26,7 +30,7 @@ const CreatePostForm = ({ handleCreatePost, initPost }) => {
         <input
           id="postAuthorInput"
           type="text"
-          maxLength="256"
+          maxLength={256}
           placeholder="Leave your name here."
           onChange={ (e) => setNewPost({ ...newPost, author: e.target.value }) }
           value={newPost.author}
@@ -38,9 +42,8 @@ const CreatePostForm = ({ handleCreatePost, initPost }) => {
       >Post Body:</label>
       <textarea
         id="postContentInput"
-        type="text"
         required
-        maxLength="10000"
+        maxLength={10000}
         placeholder="Start writing here..."
         onChange={ (e) => setNewPost({ ...newPost, content: e.target.value }) }
         value={newPost.content}
