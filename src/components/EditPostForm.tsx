@@ -70,7 +70,7 @@ EditPostForm.defaultProps = {
     title: '',
     content: '',
     author: '',
-    publichTime: 0
+    publishTime: 0
   }
 };
 

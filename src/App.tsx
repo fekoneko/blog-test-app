@@ -40,11 +40,11 @@ function App() {
     return true;
   };
 
-  const uploadPost = async (
-    post: PostInterface
-  ): Promise<boolean> => {
-    delete post.id;
-    const result = await apiPost(POSTS_API_NAME, post);
+  const uploadPost = async (post: PostInterface): Promise<boolean> => {
+    const uploadedPost: Partial<PostInterface> = post;
+    delete uploadedPost.id; // ID will be set on server
+    console.log(uploadedPost);
+    const result = await apiPost(POSTS_API_NAME, uploadedPost);
     if (result === null) {
       console.log('Post Upload Error!'); // TODO: Display error on page
       return false;
@@ -63,10 +63,7 @@ function App() {
     return true;
   };
 
-  const editPost = async (
-    post: PostInterface,
-    id: number
-  ): Promise<boolean> => {
+  const editPost = async (post: PostInterface, id: number): Promise<boolean> => {
     const result = await apiPatch(POSTS_API_NAME, post, id);
     if (result === null) {
       console.log('Post Upload Error!'); // TODO: Display error on page
@@ -82,7 +79,7 @@ function App() {
 
   const [searchRequest, setSearchRequest] = useState<string>('');
 
-  const handleSearch = (request: string) => {
+  const handleSearch = (request: string): void => {
     request = request
       .replace('&', '')
       .replace('#', '')
@@ -145,7 +142,7 @@ function App() {
     }
   }, [location.search, searchRequest]);
 
-  const handleCreatePost = async (post: PostInterface) => {
+  const handleCreatePost = async (post: PostInterface): Promise<void> => {
     const date = new Date();
     if (!post.content) return;
     if (!post.title) post.title = 'Untitled';
@@ -154,11 +151,11 @@ function App() {
     if (await uploadPost(post)) navigate('/');
   };
 
-  const handleEdit = async (post: PostInterface, id: number) => {
+  const handleEdit = async (post: PostInterface, id: number): Promise<void> => {
     if (await editPost(post, id)) navigate(`/post/${id}`);
   };
 
-  const handleDelete = async (id: number) => {
+  const handleDelete = async (id: number): Promise<void> => {
     if (await deletePost(id)) navigate('/');
   };
 
