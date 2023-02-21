@@ -1,25 +1,22 @@
 import { PostInterface } from '../scripts/interfaces';
 import Post from './Post';
 
-const Feed = (props: {
+type FeedProps = {
   posts: PostInterface[];
   handleEdit: (id: number) => any;
   handleDelete: (id: number) => any;
-}) => {
+};
+
+const Feed = ({ posts, handleEdit, handleDelete }: FeedProps) => {
   return (
     <section className="Feed">
-      {props.posts.map((post) => (
-        <Post
-          key={post.id}
-          post={post}
-          handleEdit={props.handleEdit}
-          handleDelete={props.handleDelete}
-        />
+      {posts.map((post) => (
+        <Post key={post.id} post={post} handleEdit={handleEdit} handleDelete={handleDelete} />
       ))}
     </section>
   );
 };
 Feed.defaultProps = {
-  posts: []
+  posts: [],
 };
 export default Feed;

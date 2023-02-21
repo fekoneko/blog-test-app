@@ -1,19 +1,8 @@
 import './styles/App.css';
-import {
-  Route,
-  Routes,
-  useLocation,
-  useNavigate
-} from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import {
-  POSTS_API_NAME,
-  apiGet,
-  apiPost,
-  apiDelete,
-  apiPatch
-} from './scripts/api';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import { useCallback, useEffect, useState } from 'react';
 import { PostInterface } from './scripts/interfaces';
+import { updatePosts, uploadPost, editPost, deletePost } from './scripts/postFunctions';
 import Header from './components/Header';
 import Nav from './components/Nav';
 import Footer from './components/Footer';
@@ -26,68 +15,14 @@ import EditPost from './pages/EditPost';
 
 function App() {
   const [posts, setPosts] = useState<PostInterface[]>([]);
-
-  const [displayedPosts, setDisplayedPosts] =
-    useState<PostInterface[]>(posts);
-
-  const updatePosts = async (): Promise<boolean> => {
-    const result = await apiGet(POSTS_API_NAME);
-    if (result === null) {
-      console.log('Post Load Error!'); // TODO: Display error on page
-      return false;
-    }
-    setPosts(result);
-    return true;
-  };
-
-  const uploadPost = async (post: PostInterface): Promise<boolean> => {
-    const uploadedPost: Partial<PostInterface> = post;
-    delete uploadedPost.id; // ID will be set on server
-    console.log(uploadedPost);
-    const result = await apiPost(POSTS_API_NAME, uploadedPost);
-    if (result === null) {
-      console.log('Post Upload Error!'); // TODO: Display error on page
-      return false;
-    }
-    await updatePosts();
-    return true;
-  };
-
-  const deletePost = async (id: number): Promise<boolean> => {
-    const result = await apiDelete(POSTS_API_NAME, id);
-    if (result === null) {
-      console.log('Post Upload Error!'); // TODO: Display error on page
-      return false;
-    }
-    await updatePosts();
-    return true;
-  };
-
-  const editPost = async (post: PostInterface, id: number): Promise<boolean> => {
-    const result = await apiPatch(POSTS_API_NAME, post, id);
-    if (result === null) {
-      console.log('Post Upload Error!'); // TODO: Display error on page
-      return false;
-    }
-    await updatePosts();
-    return true;
-  };
+  const [displayedPosts, setDisplayedPosts] = useState<PostInterface[]>(posts);
+  const [searchRequest, setSearchRequest] = useState<string>('');
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    updatePosts();
+    updatePosts(setPosts);
   }, []);
-
-  const [searchRequest, setSearchRequest] = useState<string>('');
-
-  const handleSearch = (request: string): void => {
-    request = request
-      .replace('&', '')
-      .replace('#', '')
-      .replace('%', '');
-    setSearchRequest(request); // Needed because in query params spaces are trimmed
-    if (request.replace(/\s+$/, '')) navigate(`/?s=${request}`);
-    else navigate('/');
-  };
 
   useEffect(() => {
     if (!searchRequest) {
@@ -104,17 +39,10 @@ function App() {
           return (
             requestPart &&
             (post.id === +requestPart ||
-              postDate.toDateString().toLowerCase() ===
-                requestPartLowercase ||
-              post.title
-                .toLowerCase()
-                .includes(requestPartLowercase) ||
-              post.content
-                .toLowerCase()
-                .includes(requestPartLowercase) ||
-              post.author
-                .toLowerCase()
-                .includes(requestPartLowercase))
+              postDate.toDateString().toLowerCase() === requestPartLowercase ||
+              post.title.toLowerCase().includes(requestPartLowercase) ||
+              post.content.toLowerCase().includes(requestPartLowercase) ||
+              post.author.toLowerCase().includes(requestPartLowercase))
           );
         })
         .some((meetRequestParts) => meetRequestParts)
@@ -122,49 +50,57 @@ function App() {
     setDisplayedPosts(result);
   }, [searchRequest, posts]);
 
-  const location = useLocation();
-
-  const navigate = useNavigate();
-
   useEffect(() => {
     if (!location.search) {
-      if (searchRequest.replace(/\s+$/, '') !== '')
-        setSearchRequest('');
+      if (searchRequest.replace(/\s+$/, '') !== '') setSearchRequest('');
       return;
     }
     const params = new URLSearchParams(location.search);
     const searchParam = params.get('s');
-    if (
-      searchParam != null &&
-      searchRequest.replace(/\s+$/, '') !== searchParam
-    ) {
+    if (searchParam != null && searchRequest.replace(/\s+$/, '') !== searchParam) {
       setSearchRequest(searchParam);
     }
   }, [location.search, searchRequest]);
 
-  const handleCreatePost = async (post: PostInterface): Promise<void> => {
-    const date = new Date();
-    if (!post.content) return;
-    if (!post.title) post.title = 'Untitled';
-    if (!post.author) post.author = 'Unknown';
-    post.publishTime = date.valueOf();
-    if (await uploadPost(post)) navigate('/');
-  };
+  const handleSearch = useCallback(
+    (request: string): void => {
+      request = request.replace('&', '').replace('#', '').replace('%', '');
+      setSearchRequest(request); // Needed because in query params spaces are trimmed
+      if (request.replace(/\s+$/, '')) navigate(`/?s=${request}`);
+      else navigate('/');
+    },
+    [navigate]
+  );
 
-  const handleEdit = async (post: PostInterface, id: number): Promise<void> => {
-    if (await editPost(post, id)) navigate(`/post/${id}`);
-  };
+  const handleCreatePost = useCallback(
+    async (post: PostInterface): Promise<void> => {
+      const date = new Date();
+      if (!post.content) return;
+      if (!post.title) post.title = 'Untitled';
+      if (!post.author) post.author = 'Unknown';
+      post.publishTime = date.valueOf();
+      if (await uploadPost(setPosts, post)) navigate('/');
+    },
+    [navigate]
+  );
 
-  const handleDelete = async (id: number): Promise<void> => {
-    if (await deletePost(id)) navigate('/');
-  };
+  const handleEdit = useCallback(
+    async (post: PostInterface, id: number): Promise<void> => {
+      if (await editPost(setPosts, post, id)) navigate(`/post/${id}`);
+    },
+    [navigate]
+  );
+
+  const handleDelete = useCallback(
+    async (id: number): Promise<void> => {
+      if (await deletePost(setPosts, id)) navigate('/');
+    },
+    [navigate]
+  );
 
   return (
     <div className="App">
-      <Header
-        searchRequest={searchRequest}
-        handleSearch={handleSearch}
-      />
+      <Header searchRequest={searchRequest} handleSearch={handleSearch} />
       <Nav location={location} />
       <Routes>
         <Route
@@ -177,10 +113,7 @@ function App() {
             />
           }
         />
-        <Route
-          path="post"
-          element={<CreatePost handleCreatePost={handleCreatePost} />}
-        />
+        <Route path="post" element={<CreatePost handleCreatePost={handleCreatePost} />} />
         <Route
           path="post/:id"
           element={
@@ -191,10 +124,7 @@ function App() {
             />
           }
         />
-        <Route
-          path="edit/:id"
-          element={<EditPost posts={posts} handleEdit={handleEdit} />}
-        />
+        <Route path="edit/:id" element={<EditPost posts={posts} handleEdit={handleEdit} />} />
         <Route path="about" element={<About />} />
         <Route path="*" element={<Missing />} />
       </Routes>

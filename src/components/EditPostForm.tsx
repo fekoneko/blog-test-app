@@ -2,18 +2,20 @@ import './styles/EditPostForm.css';
 import { PostInterface } from '../scripts/interfaces';
 import { useState } from 'react';
 
-const EditPostForm = (props: {
+type EditPostFormProps = {
   handleCreatePost: (post: PostInterface) => any;
   initPost: PostInterface;
-}) => {
-  const [newPost, setNewPost] = useState(props.initPost);
+};
+
+const EditPostForm = ({ handleCreatePost, initPost }: EditPostFormProps) => {
+  const [newPost, setNewPost] = useState(initPost);
 
   return (
     <form
       className="EditPostForm"
       onSubmit={(e) => {
         e.preventDefault();
-        props.handleCreatePost(newPost);
+        handleCreatePost(newPost);
       }}
     >
       <fieldset>
@@ -24,9 +26,7 @@ const EditPostForm = (props: {
           autoFocus
           maxLength={256}
           placeholder="What is your post about?"
-          onChange={(e) =>
-            setNewPost({ ...newPost, title: e.target.value })
-          }
+          onChange={(e) => setNewPost({ ...newPost, title: e.target.value })}
           value={newPost.title}
         />
       </fieldset>
@@ -37,16 +37,11 @@ const EditPostForm = (props: {
           type="text"
           maxLength={256}
           placeholder="Leave your name here."
-          onChange={(e) =>
-            setNewPost({ ...newPost, author: e.target.value })
-          }
+          onChange={(e) => setNewPost({ ...newPost, author: e.target.value })}
           value={newPost.author}
         />
       </fieldset>
-      <label
-        htmlFor="postContentInput"
-        style={{ position: 'absolute', left: -99999 }}
-      >
+      <label htmlFor="postContentInput" style={{ position: 'absolute', left: -99999 }}>
         Post Body:
       </label>
       <textarea
@@ -54,9 +49,7 @@ const EditPostForm = (props: {
         required
         maxLength={10000}
         placeholder="Start writing here..."
-        onChange={(e) =>
-          setNewPost({ ...newPost, content: e.target.value })
-        }
+        onChange={(e) => setNewPost({ ...newPost, content: e.target.value })}
         value={newPost.content}
       />
       <button type="submit">Upload Post</button>
@@ -70,8 +63,8 @@ EditPostForm.defaultProps = {
     title: '',
     content: '',
     author: '',
-    publishTime: 0
-  }
+    publishTime: 0,
+  },
 };
 
 export default EditPostForm;

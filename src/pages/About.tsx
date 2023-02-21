@@ -4,10 +4,7 @@ const About = () => {
   return (
     <main className="About" role="main">
       <figure className="profile">
-        <img
-          src="https://avatars3.githubusercontent.com/u/55813967"
-          alt=""
-        />
+        <img src="https://avatars3.githubusercontent.com/u/55813967" alt="" />
         <figcaption>
           @fekoneko{' '}
           <span style={{ color: '#808080' }}>

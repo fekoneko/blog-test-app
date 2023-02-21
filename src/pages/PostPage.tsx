@@ -4,13 +4,15 @@ import { Link, useParams } from 'react-router-dom';
 import Missing from './Missing';
 import { PostInterface } from '../scripts/interfaces';
 
-const PostPage = (props: {
+type PostPageProps = {
   posts: PostInterface[];
   handleEdit: (id: number) => any;
   handleDelete: (id: number) => any;
-}) => {
+};
+
+const PostPage = ({ posts, handleEdit, handleDelete }: PostPageProps) => {
   const { id } = useParams();
-  const post = props.posts.find((p) => p.id?.toString() === id);
+  const post = posts.find((p) => p.id?.toString() === id);
   if (!post) return <Missing />;
 
   const postDate = new Date(post.publishTime);
@@ -20,20 +22,18 @@ const PostPage = (props: {
       <h2 className="postTitle">{post.title}</h2>
       <div className="postInfo">
         <Link to={`/?s=${post.author}`}>{post.author}</Link>
-        <Link to={`/?s=${postDate.toDateString()}`}>
-          {postDate.toDateString()}
-        </Link>
+        <Link to={`/?s=${postDate.toDateString()}`}>{postDate.toDateString()}</Link>
         <div className="postControls">
           <button
             onClick={() => {
-              if (post.id) props.handleEdit(post.id);
+              if (post.id) handleEdit(post.id);
             }}
           >
             <BsPencilFill />
           </button>
           <button
             onClick={() => {
-              if (post.id) props.handleDelete(post.id);
+              if (post.id) handleDelete(post.id);
             }}
           >
             <BsTrashFill />
@@ -50,7 +50,7 @@ PostPage.defaultProps = {
     title: '',
     content: '',
     author: '',
-    publishTime: ''
-  }
+    publishTime: '',
+  },
 };
 export default PostPage;

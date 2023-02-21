@@ -1,17 +1,16 @@
 import './styles/Header.css';
 import SearchBar from './SearchBar';
 
-const Header = (props: {
+type HeaderProps = {
   searchRequest: string;
   handleSearch: (request: string) => any;
-}) => {
+};
+
+const Header = ({ searchRequest, handleSearch }: HeaderProps) => {
   return (
     <header className="Header">
       <h1 role="banner">@fekoneko blog.</h1>
-      <SearchBar
-        searchRequest={props.searchRequest}
-        handleSearch={props.handleSearch}
-      />
+      <SearchBar searchRequest={searchRequest} handleSearch={handleSearch} />
     </header>
   );
 };

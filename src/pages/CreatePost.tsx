@@ -1,13 +1,15 @@
 import { PostInterface } from '../scripts/interfaces';
 import EditPostForm from '../components/EditPostForm';
 
-const CreatePost = (props: {
+type CreatePostProps = {
   handleCreatePost: (post: PostInterface) => any;
-}) => {
+};
+
+const CreatePost = ({ handleCreatePost }: CreatePostProps) => {
   return (
     <main className="CreatePost" role="main">
       <h1>Create Post</h1>
-      <EditPostForm handleCreatePost={props.handleCreatePost} />
+      <EditPostForm handleCreatePost={handleCreatePost} />
     </main>
   );
 };

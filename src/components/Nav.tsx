@@ -2,25 +2,20 @@ import './styles/Nav.css';
 import { Link } from 'react-router-dom';
 import { Location } from 'react-router-dom';
 
-const Nav = (props: { location: Location }) => {
+type NavProps = {
+  location: Location;
+};
+
+const Nav = ({ location }: NavProps) => {
   return (
     <nav className="Nav">
-      <Link
-        to=""
-        className={props.location.pathname === '/' ? 'active' : ''}
-      >
+      <Link to="" className={location.pathname === '/' ? 'active' : ''}>
         Home
       </Link>
-      <Link
-        to="post"
-        className={props.location.pathname === '/post' ? 'active' : ''}
-      >
+      <Link to="post" className={location.pathname === '/post' ? 'active' : ''}>
         Create Post
       </Link>
-      <Link
-        to="about"
-        className={props.location.pathname === '/about' ? 'active' : ''}
-      >
+      <Link to="about" className={location.pathname === '/about' ? 'active' : ''}>
         About
       </Link>
     </nav>

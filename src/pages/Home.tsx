@@ -1,19 +1,17 @@
 import Feed from '../components/Feed';
 import { PostInterface } from '../scripts/interfaces';
 
-const Home = (props: {
+type HomeProps = {
   posts: PostInterface[];
   handleEdit: (id: number) => any;
   handleDelete: (id: number) => any;
-}) => {
+};
+
+const Home = ({ posts, handleEdit, handleDelete }: HomeProps) => {
   return (
     <main className="Home" role="main">
       <h1>Home</h1>
-      <Feed
-        posts={props.posts}
-        handleEdit={props.handleEdit}
-        handleDelete={props.handleDelete}
-      />
+      <Feed posts={posts} handleEdit={handleEdit} handleDelete={handleDelete} />
     </main>
   );
 };
