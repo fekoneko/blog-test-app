@@ -11,10 +11,9 @@ My second React project. This time it's a blog site :)
 
 ## Important!
 
-I used `json-server` to test this application. So make sure you run it as well as `npm start`
-
-- use `npx json-server -p 3500 -w json-server-data/db.json` you may choose your own location as the last argument
-- get started with this db.json:
+- use `npm run dev` to run the application in development mode
+- use `npm json-server -p 3500 -w <JSON data location>` to run test server, you may choose your own location as the last argument or use shortcut `npm run start-server` to watch JSON data in `json-server-data/db.json`
+- get started with this JSON data file:
 
 ```json
 {
