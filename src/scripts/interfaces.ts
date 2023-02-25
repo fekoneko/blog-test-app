@@ -5,3 +5,19 @@ export interface PostInterface {
   author: string;
   publishTime: number;
 }
+
+export enum Languages {
+  eng,
+  rus,
+  jap,
+}
+
+export enum Themes {
+  dark,
+  light,
+}
+
+export interface SettingsInterface {
+  language: Languages;
+  theme: Themes;
+}

@@ -1,22 +1,26 @@
 import './styles/Nav.css';
 import { Link } from 'react-router-dom';
 import { Location } from 'react-router-dom';
+import { useContext } from 'react';
+import { GlobalContext } from '../contexts/GlobalContext';
 
 type NavProps = {
   location: Location;
 };
 
 const Nav = ({ location }: NavProps) => {
+  const { langData } = useContext(GlobalContext);
+
   return (
     <nav className="Nav">
       <Link to="" className={location.pathname === '/' ? 'active' : ''}>
-        Home
+        {langData.Nav_home}
       </Link>
       <Link to="post" className={location.pathname === '/post' ? 'active' : ''}>
-        Create Post
+        {langData.Nav_createPost}
       </Link>
       <Link to="about" className={location.pathname === '/about' ? 'active' : ''}>
-        About
+        {langData.Nav_about}
       </Link>
     </nav>
   );

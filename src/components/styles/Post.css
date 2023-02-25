@@ -1,20 +1,29 @@
 .Post {
   background-color: #3c3c3c;
-  padding: 10px 20px;
+  padding: 10px 25px;
   margin: 0 0 20px 0;
 }
 .Post:not(:hover) .postControls {
   opacity: 0;
 }
 
+.Post .postTitle {
+  flex-grow: 1;
+}
+
 .Post .postTitle h2 {
-  margin-bottom: 0;
+  margin-block: 15px 5px;
   word-wrap: break-word;
 }
 
 .Post .postContent {
-  margin-bottom: 5px;
+  margin-top: 15px;
   word-wrap: break-word;
+}
+
+.postHead {
+  display: flex;
+  align-items: baseline;
 }
 
 .postControls {

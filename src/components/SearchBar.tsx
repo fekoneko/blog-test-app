@@ -1,6 +1,7 @@
 import './styles/SearchBar.css';
 import { BsX } from 'react-icons/bs';
-import { useRef } from 'react';
+import { useContext, useRef } from 'react';
+import { GlobalContext } from '../contexts/GlobalContext';
 
 type SearchBarProps = {
   searchRequest: string;
@@ -9,11 +10,12 @@ type SearchBarProps = {
 
 const SearchBar = ({ searchRequest, handleSearch }: SearchBarProps) => {
   const searchInputRef = useRef<HTMLInputElement>(null);
+  const { langData } = useContext(GlobalContext);
 
   return (
     <form className="SearchBar" onSubmit={(e) => e.preventDefault()}>
       <label htmlFor="search" style={{ position: 'absolute', left: -99999 }}>
-        Search:
+        {langData.SearchBar_label}
       </label>
       <input
         id="search"
@@ -21,7 +23,7 @@ const SearchBar = ({ searchRequest, handleSearch }: SearchBarProps) => {
         maxLength={256}
         type="text"
         role="search"
-        placeholder="Search"
+        placeholder={langData.SearchBar_placeholder}
         onChange={(e) => handleSearch(e.target.value)}
         value={searchRequest}
       />

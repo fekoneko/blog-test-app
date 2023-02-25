@@ -1,10 +1,27 @@
+import { useContext } from 'react';
+import { FaRegMoon, FaRegSun } from 'react-icons/fa';
+import { GlobalContext } from '../contexts/GlobalContext';
+import { Themes } from '../scripts/interfaces';
 import './styles/Footer.css';
 
 const Footer = () => {
-  const today = new Date();
+  const { settings, setSettings, langData } = useContext(GlobalContext);
+
+  const handleLanguageChange = () => {
+    setSettings((prev) => ({ ...prev, language: (prev.language + 1) % 3 }));
+  };
+
+  const handleThemeChange = () => {
+    setSettings((prev) => ({ ...prev, theme: (prev.theme + 1) % 2 }));
+  };
+
   return (
     <footer className="Footer" role="contentinfo">
-      fekoneko, {today.getFullYear()}
+      <p>{langData.Footer_text}</p>
+      <button onClick={handleLanguageChange}>Language: {langData.language}</button>
+      <button title={langData.Footer_themeTooltip} onClick={handleThemeChange}>
+        {settings.theme === Themes.light ? <FaRegSun /> : <FaRegMoon />}
+      </button>
     </footer>
   );
 };

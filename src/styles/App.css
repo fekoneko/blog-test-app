@@ -13,4 +13,5 @@
 .App > main {
   flex-grow: 1;
   overflow-y: scroll;
+  padding-right: calc(15% - 10px);
 }

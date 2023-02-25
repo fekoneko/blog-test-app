@@ -1,58 +1,60 @@
 import './styles/EditPostForm.css';
 import { PostInterface } from '../scripts/interfaces';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { GlobalContext } from '../contexts/GlobalContext';
 
 type EditPostFormProps = {
-  handleCreatePost: (post: PostInterface) => any;
+  handleSubmit: (post: PostInterface) => any;
   initPost: PostInterface;
 };
 
-const EditPostForm = ({ handleCreatePost, initPost }: EditPostFormProps) => {
+const EditPostForm = ({ handleSubmit, initPost }: EditPostFormProps) => {
   const [newPost, setNewPost] = useState(initPost);
+  const { langData } = useContext(GlobalContext);
 
   return (
     <form
       className="EditPostForm"
       onSubmit={(e) => {
         e.preventDefault();
-        handleCreatePost(newPost);
+        handleSubmit(newPost);
       }}
     >
       <fieldset>
-        <label htmlFor="postTitleInput">Title:</label>
+        <label htmlFor="postTitleInput">{langData.EditPostForm_titleLabel}</label>
         <input
           id="postTitleInput"
           type="text"
           autoFocus
           maxLength={256}
-          placeholder="What is your post about?"
+          placeholder={langData.EditPostForm_titlePlaceholder}
           onChange={(e) => setNewPost({ ...newPost, title: e.target.value })}
           value={newPost.title}
         />
       </fieldset>
       <fieldset>
-        <label htmlFor="postAuthorInput">Author:</label>
+        <label htmlFor="postAuthorInput">{langData.EditPostForm_authorLabel}</label>
         <input
           id="postAuthorInput"
           type="text"
           maxLength={256}
-          placeholder="Leave your name here."
+          placeholder={langData.EditPostForm_authorPlaceholder}
           onChange={(e) => setNewPost({ ...newPost, author: e.target.value })}
           value={newPost.author}
         />
       </fieldset>
       <label htmlFor="postContentInput" style={{ position: 'absolute', left: -99999 }}>
-        Post Body:
+        {langData.EditPostForm_contentLabel}
       </label>
       <textarea
         id="postContentInput"
         required
         maxLength={10000}
-        placeholder="Start writing here..."
+        placeholder={langData.EditPostForm_contentPlaceholder}
         onChange={(e) => setNewPost({ ...newPost, content: e.target.value })}
         value={newPost.content}
       />
-      <button type="submit">Upload Post</button>
+      <button type="submit">{langData.EditPostForm_submit}</button>
     </form>
   );
 };

@@ -29,20 +29,23 @@ function App() {
       setDisplayedPosts(posts);
       return;
     }
+
+    const searchRequestSplitted = searchRequest
+      .split(',')
+      .map((requestPart) => requestPart.trim().toLowerCase());
+
     const result = posts.filter((post: PostInterface) =>
-      searchRequest
-        .split(',')
-        .map((requestPartFull) => {
-          const requestPart = requestPartFull.trim();
-          const requestPartLowercase = requestPart.toLowerCase();
-          const postDate = new Date(post.publishTime);
+      searchRequestSplitted
+        .map((requestPart) => {
+          const requestDate = new Date(requestPart);
           return (
             requestPart &&
             (post.id === +requestPart ||
-              postDate.toDateString().toLowerCase() === requestPartLowercase ||
-              post.title.toLowerCase().includes(requestPartLowercase) ||
-              post.content.toLowerCase().includes(requestPartLowercase) ||
-              post.author.toLowerCase().includes(requestPartLowercase))
+              (post.publishTime - requestDate.valueOf() < 86400000 &&
+                post.publishTime - requestDate.valueOf() >= 0) ||
+              post.title.toLowerCase().includes(requestPart) ||
+              post.content.toLowerCase().includes(requestPart) ||
+              post.author.toLowerCase().includes(requestPart))
           );
         })
         .some((meetRequestParts) => meetRequestParts)
@@ -65,7 +68,7 @@ function App() {
   const handleSearch = useCallback(
     (request: string): void => {
       request = request.replace('&', '').replace('#', '').replace('%', '');
-      setSearchRequest(request); // Needed because in query params spaces are trimmed
+      setSearchRequest(request); // Needed because spaces are trimmed in query params
       if (request.replace(/\s+$/, '')) navigate(`/?s=${request}`);
       else navigate('/');
     },

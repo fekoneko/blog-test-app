@@ -1,4 +1,23 @@
 .Footer {
+  display: flex;
+  align-items: baseline;
   color: #808080;
   padding-block: 10px;
+}
+
+.Footer p {
+  flex-grow: 1;
+  margin: 5px 0;
+}
+
+.Footer button {
+  background-color: transparent;
+  color: #808080;
+  font-size: 0.9rem;
+  border: none;
+  transition: color 0.2s ease-in-out;
+}
+
+.Footer button:hover {
+  color: white;
 }

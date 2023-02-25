@@ -4,7 +4,7 @@
 }
 
 .SearchBar input[type='text'] {
-  width: calc(100% + 12px);
+  width: calc(100% + 10px);
   padding: 8px 32px 8px 16px;
   border: 2px white solid;
   background-color: transparent;
@@ -24,8 +24,7 @@
   background-color: transparent;
   color: white;
   padding: 0;
-  transition: background-color 0.2s ease-in-out,
-    color 0.2s ease-in-out, opacity 0.2s ease-in-out,
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, opacity 0.2s ease-in-out,
     border-color 0.2s ease-in-out;
 }
 .SearchBar .clearButton svg {

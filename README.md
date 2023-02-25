@@ -1,15 +1,21 @@
 # fekoneko blog
+
 My second React project. This time it's a blog site :)
 
 ## Functions available at the moment:
-* Creating/deleting posts
-* Viewing/editing posts
-* Search
+
+- Creating/deleting posts
+- Viewing/editing posts
+- Search
+- Multiple language support (English, Russian, Japanese)
 
 ## Important!
+
 I used `json-server` to test this application. So make sure you run it as well as `npm start`
-* use `npx json-server -p 3500 -w json-server-data/db.json` you may choose your own location as the last argument
-* get started with this db.json:
+
+- use `npx json-server -p 3500 -w json-server-data/db.json` you may choose your own location as the last argument
+- get started with this db.json:
+
 ```json
 {
   "posts": [
@@ -41,10 +47,13 @@ I used `json-server` to test this application. So make sure you run it as well a
 ## Some Screenshots
 
 ### Home Page
+
 ![image](https://user-images.githubusercontent.com/55813967/218233220-c0f26476-309f-4686-ba97-cf45017cd650.png)
 
 ### Post Page
+
 ![image](https://user-images.githubusercontent.com/55813967/218233223-4408fe68-6a6a-4d82-a2a0-bc20e8580653.png)
 
 ### Creating New Post / Editing Existing Post
+
 ![image](https://user-images.githubusercontent.com/55813967/218233224-7db91aec-b164-4ab0-848f-0cecaf3bb002.png)

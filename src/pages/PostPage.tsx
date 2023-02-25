@@ -2,7 +2,9 @@ import './styles/PostPage.css';
 import { BsTrashFill, BsPencilFill } from 'react-icons/bs';
 import { Link, useParams } from 'react-router-dom';
 import Missing from './Missing';
-import { PostInterface } from '../scripts/interfaces';
+import { Languages, PostInterface } from '../scripts/interfaces';
+import { useContext } from 'react';
+import { GlobalContext } from '../contexts/GlobalContext';
 
 type PostPageProps = {
   posts: PostInterface[];
@@ -16,13 +18,26 @@ const PostPage = ({ posts, handleEdit, handleDelete }: PostPageProps) => {
   if (!post) return <Missing />;
 
   const postDate = new Date(post.publishTime);
+  const { settings, langData } = useContext(GlobalContext);
+  const locale: Parameters<typeof postDate.toLocaleDateString>[0] =
+    settings.language === Languages.rus
+      ? 'ru-RU'
+      : settings.language === Languages.jap
+      ? 'ja-JP'
+      : 'en-US';
 
   return (
     <main className="PostPage" role="main">
       <h2 className="postTitle">{post.title}</h2>
       <div className="postInfo">
-        <Link to={`/?s=${post.author}`}>{post.author}</Link>
-        <Link to={`/?s=${postDate.toDateString()}`}>{postDate.toDateString()}</Link>
+        <Link to={`/?s=${post.author}`}>
+          {langData.namePrefix}
+          {post.author}
+          {langData.nameSuffix}
+        </Link>
+        <Link to={`/?s=${postDate.toLocaleDateString('en-US')}`}>
+          {postDate.toLocaleDateString(locale)}
+        </Link>
         <div className="postControls">
           <button
             onClick={() => {
@@ -46,11 +61,11 @@ const PostPage = ({ posts, handleEdit, handleDelete }: PostPageProps) => {
 };
 PostPage.defaultProps = {
   post: {
-    id: NaN,
+    id: undefined,
     title: '',
     content: '',
     author: '',
-    publishTime: '',
+    publishTime: 0,
   },
 };
 export default PostPage;
