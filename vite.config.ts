@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig(({ command, mode, ssrBuild }) => {
-  if (command === 'serve')
+  if (mode === 'development')
     // development
     return {
       plugins: [react()],
@@ -11,6 +11,6 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
   else
     return {
       plugins: [react()],
-      base: '/fekoneko-blog',
+      base: '/fekoneko-blog/',
     };
 });
