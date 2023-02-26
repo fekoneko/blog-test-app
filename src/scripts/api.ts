@@ -1,9 +1,9 @@
 let API_URL: string = '';
 if ((import.meta as any).env.DEV) {
-  // dev code
+  // development
   API_URL = 'http://localhost:3500';
 } else {
-  // production code
+  // production (for GitHub Pages)
   API_URL = 'https://my-json-server.typicode.com/fekoneko/fekoneko-blog';
 }
 
