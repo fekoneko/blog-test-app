@@ -42,17 +42,3 @@ My second React project. This time it's a blog site :)
   ]
 }
 ```
-
-## Some Screenshots
-
-### Home Page
-
-![image](https://user-images.githubusercontent.com/55813967/218233220-c0f26476-309f-4686-ba97-cf45017cd650.png)
-
-### Post Page
-
-![image](https://user-images.githubusercontent.com/55813967/218233223-4408fe68-6a6a-4d82-a2a0-bc20e8580653.png)
-
-### Creating New Post / Editing Existing Post
-
-![image](https://user-images.githubusercontent.com/55813967/218233224-7db91aec-b164-4ab0-848f-0cecaf3bb002.png)
