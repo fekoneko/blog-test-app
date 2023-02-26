@@ -122,11 +122,7 @@ function App() {
       <link
         rel="stylesheet"
         type="text/css"
-        href={
-          settings.theme === Themes.light
-            ? '/src/styles/lightTheme.css'
-            : '/src/styles/darkTheme.css'
-        }
+        href={settings.theme === Themes.light ? '/themes/lightTheme.css' : '/themes/darkTheme.css'}
       />
       <Header searchRequest={searchRequest} handleSearch={handleSearch} />
       <Nav location={location} />

@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "start-server": "json-server -p 3500 -w json-server-data/db.json"
+    "start-server": "json-server -p 3500 -w db.json"
   },
   "dependencies": {
     "react": "^18.2.0",
