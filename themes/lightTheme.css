@@ -1,0 +1,36 @@
+@layer lightTheme {
+  body {
+    background-color: white;
+    color: black;
+  }
+  a {
+    color: #357bd0;
+  }
+  nav {
+    background-color: white;
+  }
+  nav a {
+    color: black;
+  }
+  nav a:hover {
+    background-color: #cfcfcf;
+  }
+  .Post {
+    background-color: #e2e2e2;
+  }
+  footer {
+    background-color: #479aff;
+    color: white;
+  }
+  .postControls button:hover {
+    color: #479aff;
+  }
+  input:focus,
+  textarea:focus {
+    outline: none;
+    border: 2px solid black;
+  }
+  .About .profile img {
+    border: 3px solid #479aff;
+  }
+}
