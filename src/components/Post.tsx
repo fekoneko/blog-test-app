@@ -1,4 +1,3 @@
-import './styles/Post.css';
 import { BsTrashFill, BsPencilFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import { Languages, PostInterface } from '../scripts/interfaces';
@@ -29,6 +28,7 @@ const Post = ({ post, handleEdit, handleDelete }: PostProps) => {
         </Link>
         <div className="postControls">
           <button
+            title={langData.Post_editTooltip}
             onClick={() => {
               if (post.id) handleEdit(post.id);
             }}
@@ -36,6 +36,7 @@ const Post = ({ post, handleEdit, handleDelete }: PostProps) => {
             <BsPencilFill />
           </button>
           <button
+            title={langData.Post_deleteTooltip}
             onClick={() => {
               if (post.id) handleDelete(post.id);
             }}
@@ -55,7 +56,7 @@ const Post = ({ post, handleEdit, handleDelete }: PostProps) => {
         </Link>
       </div>
       <p className="postContent">
-        {post.content.length <= 128 ? post.content : `${post.content.slice(0, 128)}...`}
+        {post.content.length <= 256 ? post.content : `${post.content.slice(0, 256)}...`}
       </p>
     </article>
   );

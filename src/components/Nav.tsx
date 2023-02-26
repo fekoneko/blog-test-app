@@ -1,4 +1,3 @@
-import './styles/Nav.css';
 import { Link } from 'react-router-dom';
 import { Location } from 'react-router-dom';
 import { useContext } from 'react';

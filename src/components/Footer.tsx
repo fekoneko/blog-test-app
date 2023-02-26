@@ -2,7 +2,6 @@ import { useContext } from 'react';
 import { FaRegMoon, FaRegSun } from 'react-icons/fa';
 import { GlobalContext } from '../contexts/GlobalContext';
 import { Themes } from '../scripts/interfaces';
-import './styles/Footer.css';
 
 const Footer = () => {
   const { settings, setSettings, langData } = useContext(GlobalContext);
@@ -18,7 +17,9 @@ const Footer = () => {
   return (
     <footer className="Footer" role="contentinfo">
       <p>{langData.Footer_text}</p>
-      <button onClick={handleLanguageChange}>Language: {langData.language}</button>
+      <button title={langData.Footer_languageTooltip} onClick={handleLanguageChange}>
+        Language: {langData.language}
+      </button>
       <button title={langData.Footer_themeTooltip} onClick={handleThemeChange}>
         {settings.theme === Themes.light ? <FaRegSun /> : <FaRegMoon />}
       </button>

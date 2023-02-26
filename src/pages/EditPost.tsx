@@ -1,4 +1,3 @@
-import './styles/EditPost.css';
 import { useParams } from 'react-router-dom';
 import Missing from './Missing';
 import EditPostForm from '../components/EditPostForm';

@@ -1,5 +1,3 @@
-import './styles/About.css';
-
 const About = () => {
   return (
     <main className="About" role="main">

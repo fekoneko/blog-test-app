@@ -1,4 +1,4 @@
-import './styles/Header.css';
+import { Link } from 'react-router-dom';
 import SearchBar from './SearchBar';
 
 type HeaderProps = {
@@ -9,7 +9,9 @@ type HeaderProps = {
 const Header = ({ searchRequest, handleSearch }: HeaderProps) => {
   return (
     <header className="Header">
-      <h1 role="banner">@fekoneko blog.</h1>
+      <Link to="/">
+        <h1 role="banner">@fekoneko blog.</h1>
+      </Link>
       <SearchBar searchRequest={searchRequest} handleSearch={handleSearch} />
     </header>
   );

@@ -1,4 +1,3 @@
-import './styles/PostPage.css';
 import { BsTrashFill, BsPencilFill } from 'react-icons/bs';
 import { Link, useParams } from 'react-router-dom';
 import Missing from './Missing';
@@ -14,11 +13,9 @@ type PostPageProps = {
 
 const PostPage = ({ posts, handleEdit, handleDelete }: PostPageProps) => {
   const { id } = useParams();
-  const post = posts.find((p) => p.id?.toString() === id);
-  if (!post) return <Missing />;
-
-  const postDate = new Date(post.publishTime);
   const { settings, langData } = useContext(GlobalContext);
+
+  const post = posts.find((p) => p.id?.toString() === id);
   const locale: Parameters<typeof postDate.toLocaleDateString>[0] =
     settings.language === Languages.rus
       ? 'ru-RU'
@@ -26,9 +23,15 @@ const PostPage = ({ posts, handleEdit, handleDelete }: PostPageProps) => {
       ? 'ja-JP'
       : 'en-US';
 
+  if (!post) {
+    return <Missing />;
+  }
+
+  const postDate = new Date(post.publishTime);
+
   return (
     <main className="PostPage" role="main">
-      <h2 className="postTitle">{post.title}</h2>
+      <h1 className="postTitle">{post.title}</h1>
       <div className="postInfo">
         <Link to={`/?s=${post.author}`}>
           {langData.namePrefix}
@@ -40,6 +43,7 @@ const PostPage = ({ posts, handleEdit, handleDelete }: PostPageProps) => {
         </Link>
         <div className="postControls">
           <button
+            title={langData.Post_editTooltip}
             onClick={() => {
               if (post.id) handleEdit(post.id);
             }}
@@ -47,6 +51,7 @@ const PostPage = ({ posts, handleEdit, handleDelete }: PostPageProps) => {
             <BsPencilFill />
           </button>
           <button
+            title={langData.Post_deleteTooltip}
             onClick={() => {
               if (post.id) handleDelete(post.id);
             }}

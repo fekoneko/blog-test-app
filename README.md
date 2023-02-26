@@ -4,10 +4,10 @@ My second React project. This time it's a blog site :)
 
 ## Functions available at the moment:
 
-- Creating/deleting posts
-- Viewing/editing posts
+- Viewing, creating, editing and deleting posts
 - Search
-- Multiple language support (English, Russian, Japanese)
+- Multiple language support (English/Russian/Japanese)
+- Theme choice (dark/light)
 
 ## Important!
 

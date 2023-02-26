@@ -1,4 +1,3 @@
-import './styles/EditPostForm.css';
 import { PostInterface } from '../scripts/interfaces';
 import { useState, useContext } from 'react';
 import { GlobalContext } from '../contexts/GlobalContext';

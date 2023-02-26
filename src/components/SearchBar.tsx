@@ -1,4 +1,3 @@
-import './styles/SearchBar.css';
 import { BsX } from 'react-icons/bs';
 import { useContext, useRef } from 'react';
 import { GlobalContext } from '../contexts/GlobalContext';

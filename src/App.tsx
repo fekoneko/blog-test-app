@@ -1,7 +1,7 @@
-import './styles/App.css';
+import './styles/main.css';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
-import { useCallback, useEffect, useState } from 'react';
-import { PostInterface } from './scripts/interfaces';
+import { useCallback, useContext, useEffect, useState } from 'react';
+import { Languages, PostInterface, Themes } from './scripts/interfaces';
 import { updatePosts, uploadPost, editPost, deletePost } from './scripts/postFunctions';
 import Header from './components/Header';
 import Nav from './components/Nav';
@@ -12,11 +12,13 @@ import PostPage from './pages/PostPage';
 import About from './pages/About';
 import Missing from './pages/Missing';
 import EditPost from './pages/EditPost';
+import { GlobalContext } from './contexts/GlobalContext';
 
 function App() {
   const [posts, setPosts] = useState<PostInterface[]>([]);
   const [displayedPosts, setDisplayedPosts] = useState<PostInterface[]>(posts);
   const [searchRequest, setSearchRequest] = useState<string>('');
+  const { settings } = useContext(GlobalContext);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -30,39 +32,44 @@ function App() {
       return;
     }
 
-    const searchRequestSplitted = searchRequest
-      .split(',')
-      .map((requestPart) => requestPart.trim().toLowerCase());
-
-    const result = posts.filter((post: PostInterface) =>
-      searchRequestSplitted
-        .map((requestPart) => {
-          const requestDate = new Date(requestPart);
-          return (
-            requestPart &&
-            (post.id === +requestPart ||
-              (post.publishTime - requestDate.valueOf() < 86400000 &&
-                post.publishTime - requestDate.valueOf() >= 0) ||
-              post.title.toLowerCase().includes(requestPart) ||
-              post.content.toLowerCase().includes(requestPart) ||
-              post.author.toLowerCase().includes(requestPart))
-          );
-        })
-        .some((meetRequestParts) => meetRequestParts)
-    );
-    setDisplayedPosts(result);
+    const displaySearchResults = () => {
+      const searchRequestSplitted = searchRequest
+        .split(',')
+        .map((requestPart) => requestPart.trim().toLowerCase());
+      const result = posts.filter((post: PostInterface) =>
+        searchRequestSplitted
+          .map((requestPart) => {
+            const requestDate = new Date(requestPart);
+            return (
+              requestPart &&
+              (post.id === +requestPart ||
+                (post.publishTime - requestDate.valueOf() < 86400000 &&
+                  post.publishTime - requestDate.valueOf() >= 0) ||
+                post.title.toLowerCase().includes(requestPart) ||
+                post.content.toLowerCase().includes(requestPart) ||
+                post.author.toLowerCase().includes(requestPart))
+            );
+          })
+          .some((meetRequestParts) => meetRequestParts)
+      );
+      setDisplayedPosts(result);
+    };
+    displaySearchResults();
   }, [searchRequest, posts]);
 
   useEffect(() => {
-    if (!location.search) {
-      if (searchRequest.replace(/\s+$/, '') !== '') setSearchRequest('');
-      return;
-    }
-    const params = new URLSearchParams(location.search);
-    const searchParam = params.get('s');
-    if (searchParam != null && searchRequest.replace(/\s+$/, '') !== searchParam) {
-      setSearchRequest(searchParam);
-    }
+    const getSearchFromQuery = () => {
+      if (!location.search) {
+        if (searchRequest.replace(/\s+$/, '') !== '') setSearchRequest('');
+        return;
+      }
+      const params = new URLSearchParams(location.search);
+      const searchParam = params.get('s');
+      if (searchParam != null && searchRequest.replace(/\s+$/, '') !== searchParam) {
+        setSearchRequest(searchParam);
+      }
+    };
+    getSearchFromQuery();
   }, [location.search, searchRequest]);
 
   const handleSearch = useCallback(
@@ -102,7 +109,25 @@ function App() {
   );
 
   return (
-    <div className="App">
+    <div
+      className="App"
+      lang={
+        settings.language === Languages.rus
+          ? 'ru'
+          : settings.language === Languages.jap
+          ? 'ja'
+          : 'en'
+      }
+    >
+      <link
+        rel="stylesheet"
+        type="text/css"
+        href={
+          settings.theme === Themes.light
+            ? '/src/styles/lightTheme.css'
+            : '/src/styles/darkTheme.css'
+        }
+      />
       <Header searchRequest={searchRequest} handleSearch={handleSearch} />
       <Nav location={location} />
       <Routes>

@@ -7,11 +7,14 @@ export interface LangDataInterface {
   Nav_createPost: string;
   Nav_about: string;
   Footer_text: string;
+  Footer_languageTooltip: string;
   Footer_themeTooltip: string;
   Home_header: string;
   CreatePost_header: string;
   EditPost_header: string;
   Missing_header: string;
+  Post_editTooltip: string;
+  Post_deleteTooltip: string;
   EditPostForm_titleLabel: string;
   EditPostForm_titlePlaceholder: string;
   EditPostForm_authorLabel: string;
@@ -33,11 +36,14 @@ langMap.set(Languages.eng, {
   Nav_createPost: 'Create Post',
   Nav_about: 'About',
   Footer_text: 'fekoneko, 2023',
+  Footer_languageTooltip: 'Change language',
   Footer_themeTooltip: 'Change theme',
   Home_header: 'Homepage',
   CreatePost_header: 'Create Post',
   EditPost_header: 'Edit Post',
   Missing_header: 'Page not found',
+  Post_editTooltip: 'Edit',
+  Post_deleteTooltip: 'Delete',
   EditPostForm_titleLabel: 'Title:',
   EditPostForm_titlePlaceholder: 'What is your post about?',
   EditPostForm_authorLabel: 'Author:',
@@ -57,11 +63,14 @@ langMap.set(Languages.rus, {
   Nav_createPost: 'Новая запись',
   Nav_about: 'О сайте',
   Footer_text: 'fekoneko, 2023',
+  Footer_languageTooltip: 'Сменить язык',
   Footer_themeTooltip: 'Сменить тему',
   Home_header: 'Главная',
   CreatePost_header: 'Создание записи',
   EditPost_header: 'Редактирование записи',
   Missing_header: 'Страница не найдена',
+  Post_editTooltip: 'Редактировать',
+  Post_deleteTooltip: 'Удалить',
   EditPostForm_titleLabel: 'Название:',
   EditPostForm_titlePlaceholder: 'Про что вы хотите написать?',
   EditPostForm_authorLabel: 'Автор',
@@ -81,11 +90,14 @@ langMap.set(Languages.jap, {
   Nav_createPost: 'ポストを投稿',
   Nav_about: '情報',
   Footer_text: 'fekoneko, 2023',
+  Footer_languageTooltip: '言語を変更',
   Footer_themeTooltip: 'テーマを変更',
   Home_header: 'ホーム',
   CreatePost_header: 'ポストを投稿',
   EditPost_header: 'ポストを編集',
   Missing_header: 'ページが見つかりません',
+  Post_editTooltip: '編集',
+  Post_deleteTooltip: '削除',
   EditPostForm_titleLabel: '題：',
   EditPostForm_titlePlaceholder: 'ポストは何ですか？',
   EditPostForm_authorLabel: '投稿者：',

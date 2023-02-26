@@ -31,7 +31,6 @@ export const useSettings = (): [
         setReadyToSave(true);
       }
     };
-
     loadSettings();
   }, []);
 
@@ -39,7 +38,6 @@ export const useSettings = (): [
     const saveSettings = (): void => {
       if (readyToSave) localStorage.setItem('settings', JSON.stringify(settings));
     };
-
     saveSettings();
   }, [settings]);
 
