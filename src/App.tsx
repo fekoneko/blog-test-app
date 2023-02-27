@@ -76,8 +76,9 @@ function App() {
     (request: string): void => {
       request = request.replace('&', '').replace('#', '').replace('%', '');
       setSearchRequest(request); // Needed because spaces are trimmed in query params
-      if (request.replace(/\s+$/, '')) navigate(`/?s=${request}`);
-      else navigate('/');
+      if (request.replace(/\s+$/, ''))
+        navigate(`${(import.meta as any).env.BASE_URL}?s=${request}`);
+      else navigate(`${(import.meta as any).env.BASE_URL}`);
     },
     [navigate]
   );
@@ -89,21 +90,22 @@ function App() {
       if (!post.title) post.title = 'Untitled';
       if (!post.author) post.author = 'Unknown';
       post.publishTime = date.valueOf();
-      if (await uploadPost(setPosts, post)) navigate('/');
+      if (await uploadPost(setPosts, post)) navigate(`${(import.meta as any).env.BASE_URL}`);
     },
     [navigate]
   );
 
   const handleEdit = useCallback(
     async (post: PostInterface, id: number): Promise<void> => {
-      if (await editPost(setPosts, post, id)) navigate(`/post/${id}`);
+      if (await editPost(setPosts, post, id))
+        navigate(`${(import.meta as any).env.BASE_URL}post/${id}`);
     },
     [navigate]
   );
 
   const handleDelete = useCallback(
     async (id: number): Promise<void> => {
-      if (await deletePost(setPosts, id)) navigate('/');
+      if (await deletePost(setPosts, id)) navigate(`${(import.meta as any).env.BASE_URL}`);
     },
     [navigate]
   );
@@ -122,34 +124,48 @@ function App() {
       <link
         rel="stylesheet"
         type="text/css"
-        href={settings.theme === Themes.light ? '/themes/lightTheme.css' : '/themes/darkTheme.css'}
+        href={
+          settings.theme === Themes.light
+            ? `${(import.meta as any).env.BASE_URL}themes/lightTheme.css`
+            : `${(import.meta as any).env.BASE_URL}themes/darkTheme.css`
+        }
       />
       <Header searchRequest={searchRequest} handleSearch={handleSearch} />
       <Nav location={location} />
       <Routes>
         <Route
-          path=""
+          path={`${(import.meta as any).env.BASE_URL}`}
           element={
             <Home
               posts={displayedPosts}
-              handleEdit={(id: number) => navigate(`edit/${id}`)}
+              handleEdit={(id: number) =>
+                navigate(`${(import.meta as any).env.BASE_URL}edit/${id}`)
+              }
               handleDelete={handleDelete}
             />
           }
         />
-        <Route path="post" element={<CreatePost handleCreatePost={handleCreatePost} />} />
         <Route
-          path="post/:id"
+          path={`${(import.meta as any).env.BASE_URL}post`}
+          element={<CreatePost handleCreatePost={handleCreatePost} />}
+        />
+        <Route
+          path={`${(import.meta as any).env.BASE_URL}post/:id`}
           element={
             <PostPage
               posts={posts}
-              handleEdit={(id: number) => navigate(`edit/${id}`)}
+              handleEdit={(id: number) =>
+                navigate(`${(import.meta as any).env.BASE_URL}edit/${id}`)
+              }
               handleDelete={handleDelete}
             />
           }
         />
-        <Route path="edit/:id" element={<EditPost posts={posts} handleEdit={handleEdit} />} />
-        <Route path="about" element={<About />} />
+        <Route
+          path={`${(import.meta as any).env.BASE_URL}edit/:id`}
+          element={<EditPost posts={posts} handleEdit={handleEdit} />}
+        />
+        <Route path={`${(import.meta as any).env.BASE_URL}about`} element={<About />} />
         <Route path="*" element={<Missing />} />
       </Routes>
       <Footer />

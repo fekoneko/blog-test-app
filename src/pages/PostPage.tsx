@@ -33,12 +33,12 @@ const PostPage = ({ posts, handleEdit, handleDelete }: PostPageProps) => {
     <main className="PostPage" role="main">
       <h1 className="postTitle">{post.title}</h1>
       <div className="postInfo">
-        <Link to={`/?s=${post.author}`}>
+        <Link to={`${(import.meta as any).env.BASE_URL}?s=${post.author}`}>
           {langData.namePrefix}
           {post.author}
           {langData.nameSuffix}
         </Link>
-        <Link to={`/?s=${postDate.toLocaleDateString('en-US')}`}>
+        <Link to={`${(import.meta as any).env.BASE_URL}?s=${postDate.toLocaleDateString('en-US')}`}>
           {postDate.toLocaleDateString(locale)}
         </Link>
         <div className="postControls">

@@ -23,7 +23,7 @@ const Post = ({ post, handleEdit, handleDelete }: PostProps) => {
   return (
     <article className="Post" id={`post${post.id}`}>
       <div className="postHead">
-        <Link to={`/post/${post.id} `} className="postTitle">
+        <Link to={`${(import.meta as any).env.BASE_URL}post/${post.id} `} className="postTitle">
           <h2>{post.title}</h2>
         </Link>
         <div className="postControls">
@@ -46,12 +46,12 @@ const Post = ({ post, handleEdit, handleDelete }: PostProps) => {
         </div>
       </div>
       <div className="postInfo">
-        <Link to={`/?s=${post.author}`}>
+        <Link to={`${(import.meta as any).env.BASE_URL}?s=${post.author}`}>
           {langData.namePrefix}
           {post.author}
           {langData.nameSuffix}
         </Link>
-        <Link to={`/?s=${postDate.toLocaleDateString('en-US')}`}>
+        <Link to={`${(import.meta as any).env.BASE_URL}?s=${postDate.toLocaleDateString('en-US')}`}>
           {postDate.toLocaleDateString(locale)}
         </Link>
       </div>

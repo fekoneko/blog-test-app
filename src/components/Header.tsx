@@ -9,7 +9,7 @@ type HeaderProps = {
 const Header = ({ searchRequest, handleSearch }: HeaderProps) => {
   return (
     <header className="Header">
-      <Link to="/">
+      <Link to={`${(import.meta as any).env.BASE_URL}`}>
         <h1 role="banner">@fekoneko blog.</h1>
       </Link>
       <SearchBar searchRequest={searchRequest} handleSearch={handleSearch} />
