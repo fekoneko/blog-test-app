@@ -2,6 +2,11 @@
 
 My second React project. This time it's a blog site :)
 
+## Preview on GitHub Pages
+
+https://fekoneko.github.io/fekoneko-blog/
+Note: here you cannot change posts
+
 ## Functions available at the moment:
 
 - Viewing, creating, editing and deleting posts
