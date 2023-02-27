@@ -19,7 +19,6 @@ export const uploadPost = async (
 ): Promise<boolean> => {
   const uploadedPost: Partial<PostInterface> = post;
   delete uploadedPost.id; // ID will be set on server
-  console.log(uploadedPost);
   const result = await apiPost(POSTS_API_NAME, uploadedPost);
   if (result === null) {
     console.log('Post Upload Error!'); // TODO: Display error on page
