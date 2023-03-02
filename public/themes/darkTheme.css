@@ -33,4 +33,11 @@
   .About .profile img {
     border: 3px solid white;
   }
+  .modalBody {
+    background-color: #282828;
+    color: white;
+  }
+  .Modal h1 {
+    color: #479aff;
+  }
 }

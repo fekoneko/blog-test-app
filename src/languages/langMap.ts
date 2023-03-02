@@ -22,6 +22,12 @@ export interface LangDataInterface {
   EditPostForm_contentLabel: string;
   EditPostForm_contentPlaceholder: string;
   EditPostForm_submit: string;
+  LogInModal_header: string;
+  LogInModal_tip: string;
+  LogInModal_tipAction: string;
+  RegistrationModal_header: string;
+  RegistrationModal_tip: string;
+  RegistrationModal_tipAction: string;
   namePrefix: string;
   nameSuffix: string;
   language: string;
@@ -51,6 +57,12 @@ langMap.set(Languages.eng, {
   EditPostForm_contentLabel: 'Post Body:',
   EditPostForm_contentPlaceholder: 'Start writing here…',
   EditPostForm_submit: 'Upload Post',
+  LogInModal_header: 'Log In',
+  LogInModal_tip: "Don't have an account yet?",
+  LogInModal_tipAction: 'Register.',
+  RegistrationModal_header: 'Registration',
+  RegistrationModal_tip: 'Already have an account?',
+  RegistrationModal_tipAction: 'Log in.',
   namePrefix: '',
   nameSuffix: '',
   language: 'eng',
@@ -78,6 +90,12 @@ langMap.set(Languages.rus, {
   EditPostForm_contentLabel: 'Содержание:',
   EditPostForm_contentPlaceholder: 'Начните писать здесь…',
   EditPostForm_submit: 'Опубликовать',
+  LogInModal_header: 'Вход',
+  LogInModal_tip: 'Ещё нет аккаунта?',
+  LogInModal_tipAction: 'Зарегистрируйтесь.',
+  RegistrationModal_header: 'Регистрация',
+  RegistrationModal_tip: 'Уже есть аккаунт?',
+  RegistrationModal_tipAction: 'Войдите.',
   namePrefix: '',
   nameSuffix: '',
   language: 'рус',
@@ -105,6 +123,12 @@ langMap.set(Languages.jap, {
   EditPostForm_contentLabel: '本文:',
   EditPostForm_contentPlaceholder: 'ここに書き始めてください…',
   EditPostForm_submit: '投稿する',
+  LogInModal_header: 'ログイン',
+  LogInModal_tip: 'まだアカウントがありませんか？',
+  LogInModal_tipAction: 'ログイン',
+  RegistrationModal_header: 'ユーザー登録',
+  RegistrationModal_tip: 'もうアカウントがありすか？',
+  RegistrationModal_tipAction: 'ユーザー登録',
   namePrefix: '',
   nameSuffix: 'さん',
   language: '日本語',

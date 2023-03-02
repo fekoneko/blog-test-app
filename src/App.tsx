@@ -1,6 +1,6 @@
 import './styles/main.css';
 import { BASE_URL } from './scripts/constants';
-import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import { PostInterface, Themes } from './scripts/interfaces';
 import { updatePosts, uploadPost, editPost, deletePost } from './scripts/postFunctions';
@@ -19,9 +19,7 @@ function App() {
   const [posts, setPosts] = useState<PostInterface[]>([]);
   const [displayedPosts, setDisplayedPosts] = useState<PostInterface[]>(posts);
   const [searchRequest, setSearchRequest] = useState<string>('');
-  const { settings } = useContext(GlobalContext);
-  const location = useLocation();
-  const navigate = useNavigate();
+  const { navigate, searchParams, settings } = useContext(GlobalContext);
 
   useEffect(() => {
     updatePosts(setPosts);
@@ -60,18 +58,17 @@ function App() {
 
   useEffect(() => {
     const getSearchFromQuery = () => {
-      if (!location.search) {
+      const querySarch = searchParams.get('s');
+      if (!querySarch) {
         if (searchRequest.replace(/\s+$/, '') !== '') setSearchRequest('');
         return;
       }
-      const params = new URLSearchParams(location.search);
-      const searchParam = params.get('s');
-      if (searchParam != null && searchRequest.replace(/\s+$/, '') !== searchParam) {
-        setSearchRequest(searchParam);
+      if (querySarch !== null && searchRequest.replace(/\s+$/, '') !== querySarch) {
+        setSearchRequest(querySarch);
       }
     };
     getSearchFromQuery();
-  }, [location.search, searchRequest]);
+  }, [searchParams, searchRequest]);
 
   const handleSearch = (request: string): void => {
     request = request.replace('&', '').replace('#', '').replace('%', '');
@@ -109,7 +106,7 @@ function App() {
         }
       />
       <Header searchRequest={searchRequest} handleSearch={handleSearch} />
-      <Nav location={location} />
+      <Nav />
       <Routes>
         <Route
           index

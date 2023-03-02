@@ -3,12 +3,8 @@ import { Location } from 'react-router-dom';
 import { useContext } from 'react';
 import { GlobalContext } from '../contexts/GlobalContext';
 
-type NavProps = {
-  location: Location;
-};
-
-const Nav = ({ location }: NavProps) => {
-  const { langData } = useContext(GlobalContext);
+const Nav = () => {
+  const { location, langData } = useContext(GlobalContext);
 
   return (
     <nav className="Nav">

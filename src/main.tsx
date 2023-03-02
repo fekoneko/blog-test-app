@@ -8,12 +8,12 @@ import { BASE_URL } from './scripts/constants';
 const root = ReactDOM.createRoot(document.getElementById('root')!);
 root.render(
   <StrictMode>
-    <GlobalProvider>
-      <BrowserRouter>
+    <BrowserRouter>
+      <GlobalProvider>
         <Routes>
           <Route path={`${BASE_URL}*`} element={<App />} />
         </Routes>
-      </BrowserRouter>
-    </GlobalProvider>
+      </GlobalProvider>
+    </BrowserRouter>
   </StrictMode>
 );
