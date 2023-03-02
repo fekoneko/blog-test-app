@@ -1,5 +1,5 @@
 import { Languages, SettingsInterface, Themes } from '../scripts/interfaces';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export const defaultSettings: SettingsInterface = {
   language: Languages.eng,
@@ -11,7 +11,7 @@ export const useSettings = (): [
   React.Dispatch<React.SetStateAction<SettingsInterface>>
 ] => {
   const [settings, setSettings] = useState<SettingsInterface>(defaultSettings);
-  const readyToSave = useRef<boolean>(false);
+  let [readyToSave, setReadyToSave] = useState<boolean>(false);
 
   useEffect(() => {
     const loadSettings = (): void => {
@@ -28,7 +28,7 @@ export const useSettings = (): [
         } else throw new Error('Incorrect saved settings');
       } catch (err) {
       } finally {
-        readyToSave.current = true;
+        setReadyToSave(true);
       }
     };
     loadSettings();
@@ -36,7 +36,7 @@ export const useSettings = (): [
 
   useEffect(() => {
     const saveSettings = (): void => {
-      if (readyToSave.current) localStorage.setItem('settings', JSON.stringify(settings));
+      if (readyToSave) localStorage.setItem('settings', JSON.stringify(settings));
     };
     saveSettings();
   }, [settings]);

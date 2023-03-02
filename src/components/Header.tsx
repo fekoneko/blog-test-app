@@ -28,10 +28,6 @@ const Header = ({ searchRequest, handleSearch }: HeaderProps) => {
         modalRef.current?.show();
         break;
       default:
-        setSearchParams((prev) => {
-          prev.delete('m');
-          return prev;
-        });
         modalRef.current?.hide();
     }
   };
