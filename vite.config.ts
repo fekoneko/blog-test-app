@@ -12,6 +12,6 @@ export default defineConfig(({ mode }) => {
   else
     return {
       plugins: [react()],
-      base: '/fekoneko-blog/',
+      base: '/fekoneko-blog',
     };
 });

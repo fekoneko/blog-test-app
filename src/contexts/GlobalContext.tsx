@@ -17,7 +17,7 @@ export const GlobalContext = createContext<GlobalContextProps>({} as GlobalConte
 
 export const GlobalProvider = ({ children }: GlobalProviderProps) => {
   const [settings, setSettings] = useSettings();
-  let langData = useMemo<LangDataInterface>(
+  const langData = useMemo<LangDataInterface>(
     () => langMap.get(settings.language) || langMap.get(Languages.eng) || ({} as LangDataInterface),
     [settings]
   );

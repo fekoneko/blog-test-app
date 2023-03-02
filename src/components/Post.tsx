@@ -1,3 +1,4 @@
+import { BASE_URL } from '../scripts/constants';
 import { BsTrashFill, BsPencilFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import { Languages, PostInterface } from '../scripts/interfaces';
@@ -23,7 +24,7 @@ const Post = ({ post, handleEdit, handleDelete }: PostProps) => {
   return (
     <article className="Post" id={`post${post.id}`}>
       <div className="postHead">
-        <Link to={`${(import.meta as any).env.BASE_URL}post/${post.id} `} className="postTitle">
+        <Link to={`post/${post.id} `} className="postTitle">
           <h2>{post.title}</h2>
         </Link>
         <div className="postControls">
@@ -46,12 +47,12 @@ const Post = ({ post, handleEdit, handleDelete }: PostProps) => {
         </div>
       </div>
       <div className="postInfo">
-        <Link to={`${(import.meta as any).env.BASE_URL}?s=${post.author}`}>
+        <Link to={`${BASE_URL}?s=${post.author}`}>
           {langData.namePrefix}
           {post.author}
           {langData.nameSuffix}
         </Link>
-        <Link to={`${(import.meta as any).env.BASE_URL}?s=${postDate.toLocaleDateString('en-US')}`}>
+        <Link to={`${BASE_URL}?s=${postDate.toLocaleDateString('en-US')}`}>
           {postDate.toLocaleDateString(locale)}
         </Link>
       </div>

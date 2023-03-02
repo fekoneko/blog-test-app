@@ -1,3 +1,4 @@
+import { BASE_URL } from '../scripts/constants';
 import { BsTrashFill, BsPencilFill } from 'react-icons/bs';
 import { Link, useParams } from 'react-router-dom';
 import Missing from './Missing';
@@ -33,12 +34,12 @@ const PostPage = ({ posts, handleEdit, handleDelete }: PostPageProps) => {
     <main className="PostPage" role="main">
       <h1 className="postTitle">{post.title}</h1>
       <div className="postInfo">
-        <Link to={`${(import.meta as any).env.BASE_URL}?s=${post.author}`}>
+        <Link to={`${BASE_URL}?s=${post.author}`}>
           {langData.namePrefix}
           {post.author}
           {langData.nameSuffix}
         </Link>
-        <Link to={`${(import.meta as any).env.BASE_URL}?s=${postDate.toLocaleDateString('en-US')}`}>
+        <Link to={`${BASE_URL}?s=${postDate.toLocaleDateString('en-US')}`}>
           {postDate.toLocaleDateString(locale)}
         </Link>
         <div className="postControls">

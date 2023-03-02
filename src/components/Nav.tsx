@@ -12,22 +12,13 @@ const Nav = ({ location }: NavProps) => {
 
   return (
     <nav className="Nav">
-      <Link
-        to={`${(import.meta as any).env.BASE_URL}`}
-        className={location.pathname === '/' ? 'active' : ''}
-      >
+      <Link to={''} className={location.pathname === '/' ? 'active' : ''}>
         {langData.Nav_home}
       </Link>
-      <Link
-        to={`${(import.meta as any).env.BASE_URL}post`}
-        className={location.pathname === '/post' ? 'active' : ''}
-      >
+      <Link to={'post'} className={location.pathname === '/post' ? 'active' : ''}>
         {langData.Nav_createPost}
       </Link>
-      <Link
-        to={`${(import.meta as any).env.BASE_URL}about`}
-        className={location.pathname === '/about' ? 'active' : ''}
-      >
+      <Link to={'about'} className={location.pathname === '/about' ? 'active' : ''}>
         {langData.Nav_about}
       </Link>
     </nav>
