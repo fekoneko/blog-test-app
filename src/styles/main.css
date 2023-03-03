@@ -62,6 +62,13 @@
   textarea {
     transition: border-color 0.2s ease-in-out;
   }
+  header input:-webkit-autofill,
+  header input:-webkit-autofill:hover,
+  header input:-webkit-autofill:focus,
+  header input:-webkit-autofill:active {
+    -webkit-text-fill-color: white;
+    transition: background-color 5000s ease-in-out 0s;
+  }
 
   /* APP */
   .App {
@@ -86,7 +93,7 @@
   header {
     display: flex;
     align-items: center;
-    gap: 3em;
+    gap: 0.8em;
     padding-block: 1.5em;
     background-color: #479aff;
     color: white;
@@ -101,6 +108,25 @@
   }
   header .SearchBar {
     flex: 1 1 10em;
+  }
+  .userButton {
+    width: 2.5em;
+    height: 2.5em;
+    border: 2px solid white;
+    border-radius: 50%;
+    background-color: white;
+    color: #479aff;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    overflow: hidden;
+  }
+  .userButton > * {
+    width: calc(100% + 3px);
+    height: calc(100% + 3px);
+    margin: -1.5px;
+  }
+  .userButton:hover {
+    background-color: transparent;
+    color: white;
   }
 
   /* SEARCHBAR */
@@ -232,46 +258,59 @@
   }
 
   /* FORMS */
-  main form {
+  .styledForm {
     display: flex;
     flex-direction: column;
     gap: 1em;
   }
-  main fieldset {
+  .styledForm fieldset {
     display: flex;
+    align-items: center;
+    gap: 1em;
     border: none;
   }
-  main fieldset label {
-    flex: 1 0 3em;
+  .styledForm fieldset label {
+    flex: 1 0 6em;
   }
-  main fieldset input {
-    flex: 4 1 10em;
+  .styledForm fieldset input {
+    flex: 5 1 20em;
+    width: 5em;
   }
-  main input,
-  main button,
-  main textarea {
+  .styledForm input,
+  .styledForm button,
+  .styledForm textarea {
     border: 2px solid #808080;
     padding: 0.8em 1em;
     background-color: transparent;
     color: inherit;
   }
-  main input::placeholder,
-  main button::placeholder,
-  main textarea::placeholder {
+  .styledForm input::placeholder,
+  .styledForm button::placeholder,
+  .styledForm textarea::placeholder {
     color: #808080;
   }
-  main textarea {
+  .styledForm textarea {
     resize: none;
     height: 15em;
   }
-  main button {
+  .styledForm button {
     transition: border-color 0.2s ease-in-out, background-color 0.2s ease-in-out,
       color 0.2s ease-in-out;
   }
-  main button:hover {
+  .styledForm button:hover {
     border-color: #479aff;
     background-color: #479aff;
     color: white;
+  }
+  .styledForm .inputHint {
+    text-align: center;
+    padding: 0.3em 0.8em;
+    background-color: #e86b75cc;
+    color: white;
+  }
+  .styledForm input[aria-invalid='true'],
+  .styledForm textarea[aria-invalid='true'] {
+    border-color: #e86b75 !important;
   }
 
   /* ABOUT */
@@ -337,10 +376,23 @@
   }
   .modalBody {
     z-index: 99999;
-    padding: 0.5em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    width: 45%;
+    min-width: 18em;
+    max-width: 46em;
+    padding: 1em;
     border: 1.5px solid #479aff;
     background-color: white;
     box-shadow: 0 0 1em black;
+  }
+  .Modal h1,
+  .Modal p {
+    text-align: center;
+  }
+  .Modal a {
+    white-space: nowrap;
   }
   .Modal a:hover {
     text-decoration: underline !important;

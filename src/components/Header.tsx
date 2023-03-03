@@ -1,10 +1,11 @@
 import { useRef, useContext, useState, useEffect } from 'react';
-import { Link, NavigateFunction, useSearchParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { GlobalContext } from '../contexts/GlobalContext';
 import LogInModal from '../modals/LogInModal';
 import Modal, { ModalActions } from '../modals/Modal';
 import RegistrationModal from '../modals/RegistrationModal';
 import SearchBar from './SearchBar';
+import { FaUserCircle } from 'react-icons/fa';
 
 type HeaderProps = {
   searchRequest: string;
@@ -28,6 +29,7 @@ const Header = ({ searchRequest, handleSearch }: HeaderProps) => {
         modalRef.current?.show();
         break;
       default:
+        setModalMode('hidden');
         modalRef.current?.hide();
     }
   };
@@ -57,7 +59,7 @@ const Header = ({ searchRequest, handleSearch }: HeaderProps) => {
       {userId === null ? (
         <>
           <button className="userButton" onClick={handleLogIn}>
-            Log In
+            <FaUserCircle />
           </button>
           <Modal
             ref={modalRef}
@@ -68,12 +70,18 @@ const Header = ({ searchRequest, handleSearch }: HeaderProps) => {
               })
             }
           >
-            {modalMode === 'register' ? <RegistrationModal /> : <LogInModal />}
+            {modalMode === 'register' ? (
+              <RegistrationModal />
+            ) : modalMode === 'login' ? (
+              <LogInModal />
+            ) : (
+              ''
+            )}
           </Modal>
         </>
       ) : (
         <button className="userButton" onClick={handleProfile}>
-          Profile
+          <FaUserCircle />
         </button>
       )}
     </header>

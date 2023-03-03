@@ -13,7 +13,7 @@ const EditPostForm = ({ handleSubmit, initPost }: EditPostFormProps) => {
 
   return (
     <form
-      className="EditPostForm"
+      className="EditPostForm styledForm"
       onSubmit={(e) => {
         e.preventDefault();
         handleSubmit(newPost);

@@ -28,6 +28,26 @@ export interface LangDataInterface {
   RegistrationModal_header: string;
   RegistrationModal_tip: string;
   RegistrationModal_tipAction: string;
+  LogInForm_usernameLabel: string;
+  LogInForm_usernamePlaceholder: string;
+  LogInForm_usernameHint: string;
+  LogInForm_passwordLabel: string;
+  LogInForm_passwordPlaceholder: string;
+  LogInForm_passwordHint: string;
+  RegisterForm_usernameLabel: string;
+  RegisterForm_usernamePlaceholder: string;
+  RegisterForm_usernameHint: string;
+  RegisterForm_passwordLabel: string;
+  RegisterForm_passwordPlaceholder: string;
+  RegisterForm_passwordHint: string;
+  RegisterForm_confirmLabel: string;
+  RegisterForm_confirmPlaceholder: string;
+  RegisterForm_confirmHint: string;
+  exclamationMarkName: string;
+  atMarkName: string;
+  hashtagName: string;
+  dollarSignName: string;
+  percentName: string;
   namePrefix: string;
   nameSuffix: string;
   language: string;
@@ -63,6 +83,28 @@ langMap.set(Languages.eng, {
   RegistrationModal_header: 'Registration',
   RegistrationModal_tip: 'Already have an account?',
   RegistrationModal_tipAction: 'Log in.',
+  LogInForm_usernameLabel: 'Username:',
+  LogInForm_usernamePlaceholder: 'Enter the username…',
+  LogInForm_usernameHint: "This username doesn't exist!",
+  LogInForm_passwordLabel: 'Password:',
+  LogInForm_passwordPlaceholder: 'Enter your password…',
+  LogInForm_passwordHint: 'Password is incorrect!',
+  RegisterForm_usernameLabel: 'Username:',
+  RegisterForm_usernamePlaceholder: 'Come up with the username…',
+  RegisterForm_usernameHint:
+    '4 to 24 characters. Must begin with a letter. Letters, numbers, hyphens and underscores are allowed',
+  RegisterForm_passwordLabel: 'Password:',
+  RegisterForm_passwordPlaceholder: 'Choose password…',
+  RegisterForm_passwordHint:
+    '8 to 24 characters. Must include uppercase and lowercase letters, a number and a special character. Allowed special characters:',
+  RegisterForm_confirmLabel: 'Confirm password:',
+  RegisterForm_confirmPlaceholder: 'Enter password once again…',
+  RegisterForm_confirmHint: "Passwords don't match!",
+  exclamationMarkName: 'exclamation mark',
+  atMarkName: 'at mark',
+  hashtagName: 'hashtag',
+  dollarSignName: 'dollar sign',
+  percentName: 'percent',
   namePrefix: '',
   nameSuffix: '',
   language: 'eng',
@@ -96,6 +138,28 @@ langMap.set(Languages.rus, {
   RegistrationModal_header: 'Регистрация',
   RegistrationModal_tip: 'Уже есть аккаунт?',
   RegistrationModal_tipAction: 'Войдите.',
+  LogInForm_usernameLabel: 'Логин:',
+  LogInForm_usernamePlaceholder: 'Введите имя пользователя…',
+  LogInForm_usernameHint: 'Такого пользователя не существует!',
+  LogInForm_passwordLabel: 'Пароль:',
+  LogInForm_passwordPlaceholder: 'Введите пароль…',
+  LogInForm_passwordHint: 'Пароль введён неверно!',
+  RegisterForm_usernameLabel: 'Логин:',
+  RegisterForm_usernamePlaceholder: 'Придумайте имя пользователя…',
+  RegisterForm_usernameHint:
+    'От 4 до 24 символов. Должен начинальтя с буквы. Разрешены латинские буквы, цифры, дефисы и нижние подчёркивания.',
+  RegisterForm_passwordLabel: 'Пароль:',
+  RegisterForm_passwordPlaceholder: 'Придумайте пароль…',
+  RegisterForm_passwordHint:
+    'От 8 до 24 символов. Должен включать заглавные и строчные латинские буквы, цифры и специальные символы. Разрешённые символы:',
+  RegisterForm_confirmLabel: 'Подтвердите пароль:',
+  RegisterForm_confirmPlaceholder: 'Введите пароль ещё раз…',
+  RegisterForm_confirmHint: 'Пароли не совпадают!',
+  exclamationMarkName: 'восклицательный знак',
+  atMarkName: 'собака',
+  hashtagName: 'решётка',
+  dollarSignName: 'знак доллара',
+  percentName: 'процент',
   namePrefix: '',
   nameSuffix: '',
   language: 'рус',
@@ -129,6 +193,28 @@ langMap.set(Languages.jap, {
   RegistrationModal_header: 'ユーザー登録',
   RegistrationModal_tip: 'もうアカウントがありすか？',
   RegistrationModal_tipAction: 'ユーザー登録',
+  LogInForm_usernameLabel: 'ユーザー名：',
+  LogInForm_usernamePlaceholder: 'ユーザー名を入力…',
+  LogInForm_usernameHint: 'ユーザー名が間違っています！',
+  LogInForm_passwordLabel: 'パスワード：',
+  LogInForm_passwordPlaceholder: 'パスワードを入力…',
+  LogInForm_passwordHint: 'パスワードが間違っています！',
+  RegisterForm_usernameLabel: 'ユーザー名：',
+  RegisterForm_usernamePlaceholder: 'ユーザー名を思いついてください…',
+  RegisterForm_usernameHint:
+    '4 ～ 24 キャラクター。ラテン文字で始める必要があります。ラテン文字、数字、ハウフン、下線 を使用できます。',
+  RegisterForm_passwordLabel: 'パスワード：',
+  RegisterForm_passwordPlaceholder: 'パスワードを思いついてください…',
+  RegisterForm_passwordHint:
+    '8 ～ 24 キャラクター。大文字と小文字、数字、特殊文字を含める必要があります。使用できる特殊文字：',
+  RegisterForm_confirmLabel: 'パスワードを確認：',
+  RegisterForm_confirmPlaceholder: 'まだパスワードを入力してください…',
+  RegisterForm_confirmHint: 'パスワードが一致しません！',
+  exclamationMarkName: '感嘆符',
+  atMarkName: 'アットマーク',
+  hashtagName: 'ハッシュタグ',
+  dollarSignName: 'ドル記号',
+  percentName: 'パーセント',
   namePrefix: '',
   nameSuffix: 'さん',
   language: '日本語',

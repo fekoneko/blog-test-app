@@ -14,6 +14,7 @@ Note: here you cannot change posts
 - Search
 - Multiple language support (English/Russian/Japanese)
 - Theme choice (dark/light)
+- User log in and registration (not actually working yet since this needs some backend logic)
 
 ## Important!
 
