@@ -1,18 +1,13 @@
 import { createContext, ReactNode, useMemo, useState } from 'react';
-import {
-  Location,
-  NavigateFunction,
-  useLocation,
-  useNavigate,
-  useSearchParams,
-} from 'react-router-dom';
+import { Location, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { useSettings } from '../hooks/useSettings';
 import { LangDataInterface, langMap } from '../languages/langMap';
+import { BASE_URL } from '../scripts/constants';
 import { Languages, SettingsInterface } from '../scripts/interfaces';
 
 type GlobalContextProps = {
   location: Location;
-  navigate: NavigateFunction;
+  navigate: (to: string) => void;
   searchParams: ReturnType<typeof useSearchParams>[0];
   setSearchParams: ReturnType<typeof useSearchParams>[1];
   settings: SettingsInterface;
@@ -30,7 +25,8 @@ export const GlobalContext = createContext<GlobalContextProps>({} as GlobalConte
 
 export const GlobalProvider = ({ children }: GlobalProviderProps) => {
   const location = useLocation();
-  const navigate = useNavigate();
+  const globalNavigate = useNavigate();
+  const navigate = (to: string): void => globalNavigate(`${BASE_URL}${to}`);
   const [searchParams, setSearchParams] = useSearchParams();
   const [settings, setSettings] = useSettings();
   const langData = useMemo<LangDataInterface>(

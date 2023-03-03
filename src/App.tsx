@@ -73,7 +73,7 @@ function App() {
   const handleSearch = (request: string): void => {
     request = request.replace('&', '').replace('#', '').replace('%', '');
     setSearchRequest(request); // Needed because spaces are trimmed in query params
-    if (request.replace(/\s+$/, '')) navigate(`${BASE_URL}?s=${request}`);
+    if (request.replace(/\s+$/, '')) navigate(`?s=${request}`);
     else navigate('');
   };
 
