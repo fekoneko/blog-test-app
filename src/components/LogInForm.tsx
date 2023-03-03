@@ -85,7 +85,7 @@ const LogInForm = () => {
         ''
       )}
 
-      <button type="submit">Log In</button>
+      <button type="submit">{langData.LogInForm_submit}</button>
     </form>
   );
 };

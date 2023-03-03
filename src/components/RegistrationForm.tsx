@@ -44,11 +44,11 @@ const RegistrationForm = () => {
   return (
     <form className="RegistrationForm styledForm" onSubmit={handleSubmit}>
       <fieldset>
-        <label htmlFor="usernameInput">{langData.RegisterForm_usernameLabel}</label>
+        <label htmlFor="usernameInput">{langData.RegistrationForm_usernameLabel}</label>
         <input
           id="usernameInput"
           type="text"
-          placeholder={langData.RegisterForm_usernamePlaceholder}
+          placeholder={langData.RegistrationForm_usernamePlaceholder}
           autoComplete="off"
           required
           onChange={(e) => setUsername(e.target.value)}
@@ -61,18 +61,18 @@ const RegistrationForm = () => {
       </fieldset>
       {usernameFocus && username && !usernameValid ? (
         <p className="inputHint" id="usernameHint">
-          {langData.RegisterForm_usernameHint}
+          {langData.RegistrationForm_usernameHint}
         </p>
       ) : (
         ''
       )}
 
       <fieldset>
-        <label htmlFor="passwordInput">{langData.RegisterForm_passwordLabel}</label>
+        <label htmlFor="passwordInput">{langData.RegistrationForm_passwordLabel}</label>
         <input
           id="passwordInput"
           type="password"
-          placeholder={langData.RegisterForm_passwordPlaceholder}
+          placeholder={langData.RegistrationForm_passwordPlaceholder}
           autoComplete="off"
           required
           onChange={(e) => setPassword(e.target.value)}
@@ -85,7 +85,7 @@ const RegistrationForm = () => {
       </fieldset>
       {passwordFocus && password && !passwordValid ? (
         <p className="inputHint" id="passwordHint">
-          {langData.RegisterForm_passwordHint}{' '}
+          {langData.RegistrationForm_passwordHint}{' '}
           <span aria-label={langData.exclamationMarkName}>!</span>{' '}
           <span aria-label={langData.atMarkName}>@</span>{' '}
           <span aria-label={langData.hashtagName}>#</span>{' '}
@@ -97,11 +97,11 @@ const RegistrationForm = () => {
       )}
 
       <fieldset>
-        <label htmlFor="confirmInput">{langData.RegisterForm_confirmLabel}</label>
+        <label htmlFor="confirmInput">{langData.RegistrationForm_confirmLabel}</label>
         <input
           id="confirmInput"
           type="password"
-          placeholder={langData.RegisterForm_confirmPlaceholder}
+          placeholder={langData.RegistrationForm_confirmPlaceholder}
           autoComplete="off"
           required
           onChange={(e) => setConfirm(e.target.value)}
@@ -114,13 +114,13 @@ const RegistrationForm = () => {
       </fieldset>
       {confirmFocus && confirm && !confirmValid ? (
         <p className="inputHint" id="confirmHint">
-          {langData.RegisterForm_confirmHint}
+          {langData.RegistrationForm_confirmHint}
         </p>
       ) : (
         ''
       )}
 
-      <button type="submit">Log In</button>
+      <button type="submit">{langData.RegistrationForm_submit}</button>
     </form>
   );
 };

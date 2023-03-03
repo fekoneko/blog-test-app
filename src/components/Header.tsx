@@ -55,35 +55,37 @@ const Header = ({ searchRequest, handleSearch }: HeaderProps) => {
       <Link to="">
         <h1 role="banner">@fekoneko blog.</h1>
       </Link>
-      <SearchBar searchRequest={searchRequest} handleSearch={handleSearch} />
-      {userId === null ? (
-        <>
-          <button className="userButton" onClick={handleLogIn}>
+      <div>
+        <SearchBar searchRequest={searchRequest} handleSearch={handleSearch} />
+        {userId === null ? (
+          <>
+            <button className="userButton" onClick={handleLogIn}>
+              <FaUserCircle />
+            </button>
+            <Modal
+              ref={modalRef}
+              onClose={() =>
+                setSearchParams((prev) => {
+                  prev.delete('m');
+                  return prev;
+                })
+              }
+            >
+              {modalMode === 'register' ? (
+                <RegistrationModal />
+              ) : modalMode === 'login' ? (
+                <LogInModal />
+              ) : (
+                ''
+              )}
+            </Modal>
+          </>
+        ) : (
+          <button className="userButton" onClick={handleProfile}>
             <FaUserCircle />
           </button>
-          <Modal
-            ref={modalRef}
-            onClose={() =>
-              setSearchParams((prev) => {
-                prev.delete('m');
-                return prev;
-              })
-            }
-          >
-            {modalMode === 'register' ? (
-              <RegistrationModal />
-            ) : modalMode === 'login' ? (
-              <LogInModal />
-            ) : (
-              ''
-            )}
-          </Modal>
-        </>
-      ) : (
-        <button className="userButton" onClick={handleProfile}>
-          <FaUserCircle />
-        </button>
-      )}
+        )}
+      </div>
     </header>
   );
 };
