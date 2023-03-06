@@ -13,7 +13,7 @@ type HeaderProps = {
 };
 
 const Header = ({ searchRequest, handleSearch }: HeaderProps) => {
-  const { navigate, searchParams, setSearchParams, userId } = useContext(GlobalContext);
+  const { navigate, searchParams, setSearchParams, auth } = useContext(GlobalContext);
   const modalRef = useRef<ModalActions>(null);
   const [modalMode, setModalMode] = useState<'login' | 'register' | 'hidden'>('hidden');
 
@@ -35,11 +35,11 @@ const Header = ({ searchRequest, handleSearch }: HeaderProps) => {
   };
 
   useEffect(() => {
-    if (userId === null) modalModeFromQuery();
+    if (!auth) modalModeFromQuery();
   }, [searchParams]);
 
   const handleLogIn = (): void => {
-    if (userId === null)
+    if (!auth)
       setSearchParams((prev) => {
         prev.set('m', 'l');
         return prev;
@@ -47,7 +47,7 @@ const Header = ({ searchRequest, handleSearch }: HeaderProps) => {
   };
 
   const handleProfile = (): void => {
-    if (userId !== null) navigate('profile');
+    if (auth) navigate('profile');
   };
 
   return (
@@ -57,7 +57,7 @@ const Header = ({ searchRequest, handleSearch }: HeaderProps) => {
       </Link>
       <div>
         <SearchBar searchRequest={searchRequest} handleSearch={handleSearch} />
-        {userId === null ? (
+        {!auth ? (
           <>
             <button className="userButton" onClick={handleLogIn}>
               <FaUserCircle />

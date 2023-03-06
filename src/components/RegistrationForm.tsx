@@ -15,16 +15,17 @@ const RegistrationForm = () => {
   const [confirm, setConfirm] = useState<string>('');
   const [confirmValid, setConfirmValid] = useState<boolean>(false);
   const [confirmFocus, setConfirmFocus] = useState<boolean>(false);
+  const [showAllHints, setShowAllHints] = useState<boolean>(false);
 
   const validateUsername = (): boolean => USERNAME_REGEX.test(username);
   const validatePassword = (): boolean => PASSWORD_REGEX.test(password);
   const validateConfirm = (): boolean => confirm === password;
 
   useEffect(() => setUsernameValid(validateUsername()), [username]);
-
   useEffect(() => setPasswordValid(validatePassword()), [password]);
-
   useEffect(() => setConfirmValid(validateConfirm()), [confirm, password]);
+
+  useEffect(() => setShowAllHints(false), [usernameFocus, passwordFocus, confirmFocus]);
 
   const handleSubmit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
@@ -37,6 +38,7 @@ const RegistrationForm = () => {
     if (curUsernameValid && curPasswordValid && curConfirmValid) {
       // TODO
     } else {
+      setShowAllHints(true);
       // TODO
     }
   };
@@ -48,6 +50,7 @@ const RegistrationForm = () => {
         <input
           id="usernameInput"
           type="text"
+          autoFocus
           placeholder={langData.RegistrationForm_usernamePlaceholder}
           autoComplete="off"
           required
@@ -59,13 +62,15 @@ const RegistrationForm = () => {
           onBlur={() => setUsernameFocus(false)}
         />
       </fieldset>
-      {usernameFocus && username && !usernameValid ? (
-        <p className="inputHint" id="usernameHint">
-          {langData.RegistrationForm_usernameHint}
-        </p>
-      ) : (
-        ''
-      )}
+      <p
+        className={
+          'inputHint' +
+          ((showAllHints || usernameFocus) && username && !usernameValid ? '' : ' hidden')
+        }
+        id="usernameHint"
+      >
+        {langData.RegistrationForm_usernameHint}
+      </p>
 
       <fieldset>
         <label htmlFor="passwordInput">{langData.RegistrationForm_passwordLabel}</label>
@@ -83,18 +88,20 @@ const RegistrationForm = () => {
           onBlur={() => setPasswordFocus(false)}
         />
       </fieldset>
-      {passwordFocus && password && !passwordValid ? (
-        <p className="inputHint" id="passwordHint">
-          {langData.RegistrationForm_passwordHint}{' '}
-          <span aria-label={langData.exclamationMarkName}>!</span>{' '}
-          <span aria-label={langData.atMarkName}>@</span>{' '}
-          <span aria-label={langData.hashtagName}>#</span>{' '}
-          <span aria-label={langData.dollarSignName}>$</span>{' '}
-          <span aria-label={langData.percentName}>%</span>
-        </p>
-      ) : (
-        ''
-      )}
+      <p
+        className={
+          'inputHint' +
+          ((showAllHints || passwordFocus) && password && !passwordValid ? '' : ' hidden')
+        }
+        id="passwordHint"
+      >
+        {langData.RegistrationForm_passwordHint}{' '}
+        <span aria-label={langData.exclamationMarkName}>!</span>{' '}
+        <span aria-label={langData.atMarkName}>@</span>{' '}
+        <span aria-label={langData.hashtagName}>#</span>{' '}
+        <span aria-label={langData.dollarSignName}>$</span>{' '}
+        <span aria-label={langData.percentName}>%</span>
+      </p>
 
       <fieldset>
         <label htmlFor="confirmInput">{langData.RegistrationForm_confirmLabel}</label>
@@ -112,13 +119,15 @@ const RegistrationForm = () => {
           onBlur={() => setConfirmFocus(false)}
         />
       </fieldset>
-      {confirmFocus && confirm && !confirmValid ? (
-        <p className="inputHint" id="confirmHint">
-          {langData.RegistrationForm_confirmHint}
-        </p>
-      ) : (
-        ''
-      )}
+      <p
+        className={
+          'inputHint' +
+          ((showAllHints || confirmFocus) && confirm && !confirmValid ? '' : ' hidden')
+        }
+        id="confirmHint"
+      >
+        {langData.RegistrationForm_confirmHint}
+      </p>
 
       <button type="submit">{langData.RegistrationForm_submit}</button>
     </form>

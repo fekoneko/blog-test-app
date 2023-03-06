@@ -9,6 +9,7 @@ const LogInForm = () => {
   const [password, setPassword] = useState<string>('');
   const [passwordValid, setPasswordValid] = useState<boolean>(true);
   const [passwordFocus, setPasswordFocus] = useState<boolean>(false);
+  const [showAllHints, setShowAllHints] = useState<boolean>(false);
 
   useEffect(() => {
     if (!usernameValid) setUsernameValid(true); // will be actually checked on submit
@@ -17,6 +18,8 @@ const LogInForm = () => {
   useEffect(() => {
     if (!passwordValid) setPasswordValid(true); // will be actually checked on submit
   }, [password]);
+
+  useEffect(() => setShowAllHints(false), [usernameFocus, passwordFocus]);
 
   const validateForm = async (): Promise<[usernameValid: boolean, passwordValid: boolean]> => {
     // TODO check on server
@@ -31,6 +34,7 @@ const LogInForm = () => {
     if (curUsernameValid && curPasswordValid) {
       // TODO
     } else {
+      setShowAllHints(true);
       // TODO
     }
   };
@@ -42,6 +46,7 @@ const LogInForm = () => {
         <input
           id="usernameInput"
           type="text"
+          autoFocus
           placeholder={langData.LogInForm_usernamePlaceholder}
           autoComplete="off"
           required
@@ -53,13 +58,15 @@ const LogInForm = () => {
           onBlur={() => setUsernameFocus(false)}
         />
       </fieldset>
-      {usernameFocus && username && !usernameValid ? (
-        <p className="inputHint" id="usernameHint">
-          {langData.LogInForm_usernameHint}
-        </p>
-      ) : (
-        ''
-      )}
+      <p
+        className={
+          'inputHint' +
+          ((showAllHints || usernameFocus) && username && !usernameValid ? '' : ' hidden')
+        }
+        id="usernameHint"
+      >
+        {langData.LogInForm_usernameHint}
+      </p>
 
       <fieldset>
         <label htmlFor="passwordInput">{langData.LogInForm_passwordLabel}</label>
@@ -67,7 +74,6 @@ const LogInForm = () => {
           id="passwordInput"
           type="password"
           placeholder={langData.LogInForm_passwordPlaceholder}
-          autoComplete="off"
           required
           onChange={(e) => setPassword(e.target.value)}
           value={password}
@@ -77,13 +83,15 @@ const LogInForm = () => {
           onBlur={() => setPasswordFocus(false)}
         />
       </fieldset>
-      {passwordFocus && password && !passwordValid ? (
-        <p className="inputHint" id="passwordHint">
-          {langData.LogInForm_passwordHint}
-        </p>
-      ) : (
-        ''
-      )}
+      <p
+        className={
+          'inputHint' +
+          ((showAllHints || passwordFocus) && password && !passwordValid ? '' : ' hidden')
+        }
+        id="passwordHint"
+      >
+        {langData.LogInForm_passwordHint}
+      </p>
 
       <button type="submit">{langData.LogInForm_submit}</button>
     </form>

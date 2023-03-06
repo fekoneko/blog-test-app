@@ -5,6 +5,13 @@ import { LangDataInterface, langMap } from '../languages/langMap';
 import { BASE_URL } from '../scripts/constants';
 import { Languages, SettingsInterface } from '../scripts/interfaces';
 
+type Auth = {
+  username: string;
+  password: string;
+  roles: Array<number>;
+  accessToken: string;
+};
+
 type GlobalContextProps = {
   location: Location;
   navigate: (to: string) => void;
@@ -13,8 +20,8 @@ type GlobalContextProps = {
   settings: SettingsInterface;
   setSettings: React.Dispatch<React.SetStateAction<SettingsInterface>>;
   langData: LangDataInterface;
-  userId: number | null;
-  setUserId: React.Dispatch<React.SetStateAction<number | null>>;
+  auth: Auth | null;
+  setAuth: React.Dispatch<React.SetStateAction<Auth | null>>;
 };
 
 type GlobalProviderProps = {
@@ -33,7 +40,7 @@ export const GlobalProvider = ({ children }: GlobalProviderProps) => {
     () => langMap.get(settings.language) || langMap.get(Languages.eng) || ({} as LangDataInterface),
     [settings]
   );
-  const [userId, setUserId] = useState<number | null>(null);
+  const [auth, setAuth] = useState<Auth | null>(null);
 
   return (
     <GlobalContext.Provider
@@ -45,8 +52,8 @@ export const GlobalProvider = ({ children }: GlobalProviderProps) => {
         settings,
         setSettings,
         langData,
-        userId,
-        setUserId,
+        auth: auth,
+        setAuth: setAuth,
       }}
     >
       {children}

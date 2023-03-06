@@ -309,10 +309,21 @@
     color: white;
   }
   .styledForm .inputHint {
+    font-size: 0.85em;
     text-align: center;
+    max-height: 10em;
+    margin-top: -0.6em;
     padding: 0.3em 0.8em;
+    overflow: hidden;
     background-color: #e86b75cc;
     color: white;
+    transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out,
+      padding-block 0.5s ease-in-out;
+  }
+  .styledForm .inputHint.hidden {
+    opacity: 0;
+    max-height: 0;
+    padding-block: 0;
   }
   .styledForm input[aria-invalid='true'],
   .styledForm textarea[aria-invalid='true'] {
@@ -388,7 +399,6 @@
     width: 45%;
     min-width: 18em;
     max-width: 46em;
-    height: fit-content;
     max-height: 90vh;
     overflow-y: scroll;
     padding: 1em;
