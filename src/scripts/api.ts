@@ -9,7 +9,7 @@ if ((import.meta as any).env.DEV) {
 
 export const POSTS_API_NAME = 'posts';
 
-export const apiGet = async (apiName: string) => {
+export const apiGet = async (apiName: string): Promise<any | null> => {
   const request = {
     method: 'GET',
     headers: {
@@ -17,11 +17,16 @@ export const apiGet = async (apiName: string) => {
     },
   };
   const response = await fetch(`${API_URL}/${apiName}`, request);
-  if (response.ok) return await response.json();
-  else return null;
+  if (response.ok) {
+    try {
+      return await response.json();
+    } catch (err) {
+      return '';
+    }
+  } else return null;
 };
 
-export const apiPost = async (apiName: string, item: object) => {
+export const apiPost = async (apiName: string, item: object): Promise<any | null> => {
   const request = {
     method: 'POST',
     headers: {
@@ -30,11 +35,16 @@ export const apiPost = async (apiName: string, item: object) => {
     body: JSON.stringify(item),
   };
   const response = await fetch(`${API_URL}/${apiName}`, request);
-  if (response.ok) return await response.json();
-  else return null;
+  if (response.ok) {
+    try {
+      return await response.json();
+    } catch (err) {
+      return '';
+    }
+  } else return null;
 };
 
-export const apiDelete = async (apiName: string, id: number) => {
+export const apiDelete = async (apiName: string, id: number): Promise<any | null> => {
   const request = {
     method: 'DELETE',
     headers: {
@@ -42,11 +52,16 @@ export const apiDelete = async (apiName: string, id: number) => {
     },
   };
   const response = await fetch(`${API_URL}/${apiName}/${id}`, request);
-  if (response.ok) return await response.json();
-  else return null;
+  if (response.ok) {
+    try {
+      return await response.json();
+    } catch (err) {
+      return '';
+    }
+  } else return null;
 };
 
-export const apiPatch = async (apiName: string, item: object, id: number) => {
+export const apiPatch = async (apiName: string, item: object, id: number): Promise<any | null> => {
   const request = {
     method: 'PATCH',
     headers: {
@@ -55,6 +70,11 @@ export const apiPatch = async (apiName: string, item: object, id: number) => {
     body: JSON.stringify(item),
   };
   const response = await fetch(`${API_URL}/${apiName}/${id}`, request);
-  if (response.ok) return await response.json();
-  else return null;
+  if (response.ok) {
+    try {
+      return await response.json();
+    } catch (err) {
+      return '';
+    }
+  } else return null;
 };
