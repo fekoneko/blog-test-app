@@ -15,6 +15,7 @@ export interface LangDataInterface {
   Missing_header: string;
   Post_editTooltip: string;
   Post_deleteTooltip: string;
+  Post_EditedCaption: string;
   EditPostForm_titleLabel: string;
   EditPostForm_titlePlaceholder: string;
   EditPostForm_authorLabel: string;
@@ -72,6 +73,7 @@ langMap.set(Languages.eng, {
   Missing_header: 'Page not found',
   Post_editTooltip: 'Edit',
   Post_deleteTooltip: 'Delete',
+  Post_EditedCaption: 'edited',
   EditPostForm_titleLabel: 'Title:',
   EditPostForm_titlePlaceholder: 'What is your post about?',
   EditPostForm_authorLabel: 'Author:',
@@ -129,6 +131,7 @@ langMap.set(Languages.rus, {
   Missing_header: 'Страница не найдена',
   Post_editTooltip: 'Редактировать',
   Post_deleteTooltip: 'Удалить',
+  Post_EditedCaption: 'ред.',
   EditPostForm_titleLabel: 'Название:',
   EditPostForm_titlePlaceholder: 'Про что вы хотите написать?',
   EditPostForm_authorLabel: 'Автор',
@@ -186,6 +189,7 @@ langMap.set(Languages.jap, {
   Missing_header: 'ページが見つかりません',
   Post_editTooltip: '編集',
   Post_deleteTooltip: '削除',
+  Post_EditedCaption: '編集',
   EditPostForm_titleLabel: '題：',
   EditPostForm_titlePlaceholder: 'ポストは何ですか？',
   EditPostForm_authorLabel: '投稿者：',

@@ -1,6 +1,9 @@
 import { PostInterface } from './interfaces';
 import { POSTS_API_NAME, apiGet, apiPost, apiDelete, apiPatch } from './api';
 
+export const findPostById = (posts: PostInterface[], id: number): PostInterface | undefined =>
+  posts.find((post) => post.id === id);
+
 export const updatePosts = async (
   setPosts: React.Dispatch<React.SetStateAction<PostInterface[]>>
 ): Promise<boolean> => {
@@ -15,11 +18,14 @@ export const updatePosts = async (
 
 export const uploadPost = async (
   setPosts: React.Dispatch<React.SetStateAction<PostInterface[]>>,
-  post: PostInterface
+  newPost: PostInterface
 ): Promise<boolean> => {
-  const uploadedPost: Partial<PostInterface> = post;
-  delete uploadedPost.id; // ID will be set on server
-  const result = await apiPost(POSTS_API_NAME, uploadedPost);
+  const preparedPost: Partial<PostInterface> = newPost;
+  delete preparedPost.id;
+  delete preparedPost.publishTime;
+  if ('editTime' in preparedPost) delete preparedPost.editTime;
+
+  const result = await apiPost(POSTS_API_NAME, preparedPost);
   if (result === null) {
     console.log('Post Upload Error!'); // TODO: Display error on page
     return false;
@@ -30,9 +36,9 @@ export const uploadPost = async (
 
 export const deletePost = async (
   setPosts: React.Dispatch<React.SetStateAction<PostInterface[]>>,
-  id: number
+  deleteId: number
 ): Promise<boolean> => {
-  const result = await apiDelete(POSTS_API_NAME, id);
+  const result = await apiDelete(POSTS_API_NAME, deleteId);
   if (result === null) {
     console.log('Post Upload Error!'); // TODO: Display error on page
     return false;
@@ -41,16 +47,38 @@ export const deletePost = async (
   return true;
 };
 
-export const editPost = async (
+const editPost = async (
   setPosts: React.Dispatch<React.SetStateAction<PostInterface[]>>,
-  post: PostInterface,
-  id: number
+  updatedFields: Partial<PostInterface>,
+  editId: number
 ): Promise<boolean> => {
-  const result = await apiPatch(POSTS_API_NAME, post, id);
+  const preparedFields: Partial<PostInterface> = updatedFields;
+  delete preparedFields.id;
+  if ('editTime' in preparedFields) delete preparedFields.editTime;
+
+  const result = await apiPatch(POSTS_API_NAME, preparedFields, editId);
   if (result === null) {
     console.log('Post Upload Error!'); // TODO: Display error on page
     return false;
   }
   await updatePosts(setPosts);
   return true;
+};
+
+export const compareAndEditPost = async (
+  setPosts: React.Dispatch<React.SetStateAction<PostInterface[]>>,
+  currentPost: PostInterface,
+  editedPost: PostInterface,
+  editiId: number
+): Promise<boolean> => {
+  const updatedFields: Partial<PostInterface> = {};
+  for (const field in currentPost) {
+    if (
+      field in editedPost &&
+      currentPost[field as keyof PostInterface] !== editedPost[field as keyof PostInterface]
+    ) {
+      updatedFields[field as keyof PostInterface] = editedPost[field as keyof PostInterface] as any;
+    }
+  }
+  return editPost(setPosts, updatedFields, editiId);
 };

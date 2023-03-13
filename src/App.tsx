@@ -3,7 +3,13 @@ import { BASE_URL } from './scripts/constants';
 import { Route, Routes } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import { PostInterface, Themes } from './scripts/interfaces';
-import { updatePosts, uploadPost, editPost, deletePost } from './scripts/postFunctions';
+import {
+  updatePosts,
+  uploadPost,
+  compareAndEditPost,
+  deletePost,
+  findPostById,
+} from './scripts/postFunctions';
 import Header from './components/Header';
 import Nav from './components/Nav';
 import Footer from './components/Footer';
@@ -87,7 +93,9 @@ function App() {
   };
 
   const handleEdit = async (post: PostInterface, id: number): Promise<void> => {
-    if (await editPost(setPosts, post, id)) navigate(`post/${id}`);
+    const currentPost: PostInterface | undefined = findPostById(posts, id);
+    if (currentPost === undefined) return;
+    if (await compareAndEditPost(setPosts, currentPost, post, id)) navigate(`post/${id}`);
   };
 
   const handleDelete = async (id: number): Promise<void> => {

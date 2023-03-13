@@ -17,18 +17,16 @@ const PostPage = ({ posts, handleEdit, handleDelete }: PostPageProps) => {
   const { settings, langData } = useContext(GlobalContext);
 
   const post = posts.find((p) => p.id?.toString() === id);
-  const locale: Parameters<typeof postDate.toLocaleDateString>[0] =
+  if (!post) return <Missing />;
+
+  const postPublishDate = new Date(post.publishTime);
+  const postEditDate = post.editTime !== undefined ? new Date(post.editTime) : null;
+  const locale: Parameters<typeof postPublishDate.toLocaleDateString>[0] =
     settings.language === Languages.rus
       ? 'ru-RU'
       : settings.language === Languages.jap
       ? 'ja-JP'
       : 'en-US';
-
-  if (!post) {
-    return <Missing />;
-  }
-
-  const postDate = new Date(post.publishTime);
 
   return (
     <main className="PostPage" role="main">
@@ -39,8 +37,11 @@ const PostPage = ({ posts, handleEdit, handleDelete }: PostPageProps) => {
           {post.author}
           {langData.nameSuffix}
         </Link>
-        <Link to={`${BASE_URL}?s=${postDate.toLocaleDateString('en-US')}`}>
-          {postDate.toLocaleDateString(locale)}
+        <Link to={`${BASE_URL}?s=${postPublishDate.toLocaleDateString('en-US')}`}>
+          {postPublishDate.toLocaleDateString(locale)}
+          {postEditDate
+            ? ` (${langData.Post_EditedCaption} ${postEditDate.toLocaleDateString(locale)})`
+            : ''}
         </Link>
         <div className="postControls">
           <button

@@ -4,6 +4,7 @@ export interface PostInterface {
   content: string;
   author: string;
   publishTime: number;
+  editTime?: number;
 }
 
 export enum Languages {

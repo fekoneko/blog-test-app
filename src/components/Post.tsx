@@ -12,9 +12,10 @@ type PostProps = {
 };
 
 const Post = ({ post, handleEdit, handleDelete }: PostProps) => {
-  const postDate = new Date(post.publishTime);
+  const postPublishDate = new Date(post.publishTime);
+  const postEditDate = post.editTime !== undefined ? new Date(post.editTime) : null;
   const { settings, langData } = useContext(GlobalContext);
-  const locale: Parameters<typeof postDate.toLocaleDateString>[0] =
+  const locale: Parameters<typeof postPublishDate.toLocaleDateString>[0] =
     settings.language === Languages.rus
       ? 'ru-RU'
       : settings.language === Languages.jap
@@ -52,8 +53,11 @@ const Post = ({ post, handleEdit, handleDelete }: PostProps) => {
           {post.author}
           {langData.nameSuffix}
         </Link>
-        <Link to={`${BASE_URL}?s=${postDate.toLocaleDateString('en-US')}`}>
-          {postDate.toLocaleDateString(locale)}
+        <Link to={`${BASE_URL}?s=${postPublishDate.toLocaleDateString('en-US')}`}>
+          {postPublishDate.toLocaleDateString(locale)}
+          {postEditDate
+            ? ` (${langData.Post_EditedCaption} ${postEditDate.toLocaleDateString(locale)})`
+            : ''}
         </Link>
       </div>
       <p className="postContent">
