@@ -155,7 +155,7 @@ langMap.set(Languages.rus, {
   RegistrationForm_usernameLabel: 'Логин:',
   RegistrationForm_usernamePlaceholder: 'Придумайте имя пользователя…',
   RegistrationForm_usernameHint:
-    'От 4 до 24 символов. Должен начинальтя с буквы. Разрешены латинские буквы, цифры, дефисы и нижние подчёркивания.',
+    'От 4 до 24 символов. Должен начинаться с буквы. Разрешены латинские буквы, цифры, дефисы и нижние подчёркивания.',
   RegistrationForm_passwordLabel: 'Пароль:',
   RegistrationForm_passwordPlaceholder: 'Придумайте пароль…',
   RegistrationForm_passwordHint:
