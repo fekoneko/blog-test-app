@@ -20,7 +20,7 @@ import About from './pages/About';
 import Missing from './pages/Missing';
 import EditPost from './pages/EditPost';
 import { GlobalContext } from './contexts/GlobalContext';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 
 function App() {
   const [posts, setPosts] = useState<PostInterface[]>([]);
