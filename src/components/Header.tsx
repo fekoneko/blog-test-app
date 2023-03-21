@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { GlobalContext } from '../contexts/GlobalContext';
 import LogInModal from '../modals/LogInModal';
 import Modal, { ModalActions } from '../modals/Modal';
-import RegistrationModal from '../modals/RegistrationModal';
+import SignUpModal from '../modals/SignUpModal';
 import SearchBar from './SearchBar';
 import { FaUserCircle } from 'react-icons/fa';
 
@@ -13,7 +13,7 @@ type HeaderProps = {
 };
 
 const Header = ({ searchRequest, handleSearch }: HeaderProps) => {
-  const { navigate, searchParams, setSearchParams, auth } = useContext(GlobalContext);
+  const { navigate, searchParams, setSearchParams, auth, langData } = useContext(GlobalContext);
   const modalRef = useRef<ModalActions>(null);
   const [modalMode, setModalMode] = useState<'login' | 'register' | 'hidden'>('hidden');
 
@@ -53,7 +53,7 @@ const Header = ({ searchRequest, handleSearch }: HeaderProps) => {
   return (
     <header className="Header">
       <Link to="">
-        <h1 role="banner">@fekoneko blog.</h1>
+        <h1 role="banner">{`@${langData.SiteName}.`}</h1>
       </Link>
       <div>
         <SearchBar searchRequest={searchRequest} handleSearch={handleSearch} />
@@ -72,7 +72,7 @@ const Header = ({ searchRequest, handleSearch }: HeaderProps) => {
               }
             >
               {modalMode === 'register' ? (
-                <RegistrationModal />
+                <SignUpModal />
               ) : modalMode === 'login' ? (
                 <LogInModal />
               ) : (

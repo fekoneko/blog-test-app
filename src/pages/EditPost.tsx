@@ -4,6 +4,7 @@ import EditPostForm from '../components/EditPostForm';
 import { PostInterface } from '../scripts/interfaces';
 import { useContext } from 'react';
 import { GlobalContext } from '../contexts/GlobalContext';
+import { Helmet } from 'react-helmet-async';
 
 type EditPostProps = {
   posts: PostInterface[];
@@ -18,6 +19,10 @@ const EditPost = ({ posts, handleEdit }: EditPostProps) => {
 
   return (
     <main className="EditPost" role="main">
+      <Helmet>
+        <title>{`${langData.EditPost_title} - ${langData.SiteName}`}</title>
+      </Helmet>
+
       <h1>{langData.EditPost_header}</h1>
       <EditPostForm
         handleSubmit={(post) => {

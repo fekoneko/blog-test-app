@@ -1,6 +1,16 @@
+import { useContext } from 'react';
+import { Helmet } from 'react-helmet-async';
+import { GlobalContext } from '../contexts/GlobalContext';
+
 const About = () => {
+  const { langData } = useContext(GlobalContext);
+
   return (
     <main className="About" role="main">
+      <Helmet>
+        <title>{`${langData.About_title} - ${langData.SiteName}`}</title>
+      </Helmet>
+
       <figure className="profile">
         <img src="https://avatars3.githubusercontent.com/u/55813967" alt="" />
         <figcaption>

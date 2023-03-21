@@ -113,6 +113,7 @@ function App() {
           element={
             <Home
               posts={displayedPosts}
+              search={!!searchRequest}
               handleEdit={(id: number) => navigate(`edit/${id}`)}
               handleDelete={handleDelete}
             />

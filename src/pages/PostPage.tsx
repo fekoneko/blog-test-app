@@ -5,6 +5,7 @@ import Missing from './Missing';
 import { Languages, PostInterface } from '../scripts/interfaces';
 import { useContext } from 'react';
 import { GlobalContext } from '../contexts/GlobalContext';
+import { Helmet } from 'react-helmet-async';
 
 type PostPageProps = {
   posts: PostInterface[];
@@ -30,6 +31,10 @@ const PostPage = ({ posts, handleEdit, handleDelete }: PostPageProps) => {
 
   return (
     <main className="PostPage" role="main">
+      <Helmet>
+        <title>{`${post.title} - ${langData.SiteName}`}</title>
+      </Helmet>
+
       <h1 className="postTitle">{post.title}</h1>
       <div className="postInfo">
         <Link to={`${BASE_URL}?s=${post.author}`}>

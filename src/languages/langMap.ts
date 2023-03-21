@@ -1,6 +1,7 @@
 import { Languages } from '../scripts/interfaces';
 
 export interface LangDataInterface {
+  SiteName: string;
   SearchBar_label: string;
   SearchBar_placeholder: string;
   Nav_home: string;
@@ -9,9 +10,15 @@ export interface LangDataInterface {
   Footer_text: string;
   Footer_languageTooltip: string;
   Footer_themeTooltip: string;
+  Home_title: string;
   Home_header: string;
+  Search_title: string;
+  CreatePost_title: string;
   CreatePost_header: string;
+  EditPost_title: string;
   EditPost_header: string;
+  About_title: string;
+  Missing_title: string;
   Missing_header: string;
   Post_editTooltip: string;
   Post_deleteTooltip: string;
@@ -23,12 +30,14 @@ export interface LangDataInterface {
   EditPostForm_contentLabel: string;
   EditPostForm_contentPlaceholder: string;
   EditPostForm_submit: string;
+  LogInModal_title: string;
   LogInModal_header: string;
   LogInModal_tip: string;
   LogInModal_tipAction: string;
-  RegistrationModal_header: string;
-  RegistrationModal_tip: string;
-  RegistrationModal_tipAction: string;
+  SignUpModal_title: string;
+  SignUpModal_header: string;
+  SignUpModal_tip: string;
+  SignUpModal_tipAction: string;
   LogInForm_usernameLabel: string;
   LogInForm_usernamePlaceholder: string;
   LogInForm_usernameHint: string;
@@ -59,6 +68,7 @@ export interface LangDataInterface {
 export const langMap: Map<Languages, LangDataInterface> = new Map();
 
 langMap.set(Languages.eng, {
+  SiteName: 'fekoneko blog',
   SearchBar_label: 'Search:',
   SearchBar_placeholder: 'Search',
   Nav_home: 'Home',
@@ -67,9 +77,15 @@ langMap.set(Languages.eng, {
   Footer_text: 'fekoneko, 2023',
   Footer_languageTooltip: 'Change language',
   Footer_themeTooltip: 'Change theme',
+  Home_title: 'Homepage',
   Home_header: 'Homepage',
+  Search_title: 'Search',
+  CreatePost_title: 'Create Post',
   CreatePost_header: 'Create Post',
+  EditPost_title: 'Edit Post',
   EditPost_header: 'Edit Post',
+  About_title: 'About',
+  Missing_title: 'Page not found',
   Missing_header: 'Page not found',
   Post_editTooltip: 'Edit',
   Post_deleteTooltip: 'Delete',
@@ -81,12 +97,14 @@ langMap.set(Languages.eng, {
   EditPostForm_contentLabel: 'Post Body:',
   EditPostForm_contentPlaceholder: 'Start writing here…',
   EditPostForm_submit: 'Upload Post',
+  LogInModal_title: 'Log In',
   LogInModal_header: 'Log In',
   LogInModal_tip: "Don't have an account yet?",
   LogInModal_tipAction: 'Sign up.',
-  RegistrationModal_header: 'Sign Up',
-  RegistrationModal_tip: 'Already have an account?',
-  RegistrationModal_tipAction: 'Log in.',
+  SignUpModal_title: 'Sign Up',
+  SignUpModal_header: 'Sign Up',
+  SignUpModal_tip: 'Already have an account?',
+  SignUpModal_tipAction: 'Log in.',
   LogInForm_usernameLabel: 'Username:',
   LogInForm_usernamePlaceholder: 'Enter the username…',
   LogInForm_usernameHint: "This username doesn't exist!",
@@ -117,6 +135,7 @@ langMap.set(Languages.eng, {
 });
 
 langMap.set(Languages.rus, {
+  SiteName: 'fekoneko blog',
   SearchBar_label: 'Поиск:',
   SearchBar_placeholder: 'Поиск',
   Nav_home: 'Главная',
@@ -125,9 +144,15 @@ langMap.set(Languages.rus, {
   Footer_text: 'fekoneko, 2023',
   Footer_languageTooltip: 'Сменить язык',
   Footer_themeTooltip: 'Сменить тему',
+  Home_title: 'Главная',
   Home_header: 'Главная',
+  Search_title: 'Поиск',
+  CreatePost_title: 'Создание записи',
   CreatePost_header: 'Создание записи',
+  EditPost_title: 'Редактирование записи',
   EditPost_header: 'Редактирование записи',
+  About_title: 'О сайте',
+  Missing_title: 'Страница не найдена',
   Missing_header: 'Страница не найдена',
   Post_editTooltip: 'Редактировать',
   Post_deleteTooltip: 'Удалить',
@@ -139,12 +164,14 @@ langMap.set(Languages.rus, {
   EditPostForm_contentLabel: 'Содержание:',
   EditPostForm_contentPlaceholder: 'Начните писать здесь…',
   EditPostForm_submit: 'Опубликовать',
+  LogInModal_title: 'Вход',
   LogInModal_header: 'Вход',
   LogInModal_tip: 'Ещё нет аккаунта?',
   LogInModal_tipAction: 'Зарегистрируйтесь.',
-  RegistrationModal_header: 'Регистрация',
-  RegistrationModal_tip: 'Уже есть аккаунт?',
-  RegistrationModal_tipAction: 'Войдите.',
+  SignUpModal_title: 'Регистрация',
+  SignUpModal_header: 'Регистрация',
+  SignUpModal_tip: 'Уже есть аккаунт?',
+  SignUpModal_tipAction: 'Войдите.',
   LogInForm_usernameLabel: 'Логин:',
   LogInForm_usernamePlaceholder: 'Введите имя пользователя…',
   LogInForm_usernameHint: 'Такого пользователя не существует!',
@@ -175,6 +202,7 @@ langMap.set(Languages.rus, {
 });
 
 langMap.set(Languages.jap, {
+  SiteName: 'fekoneko blog',
   SearchBar_label: '検索：',
   SearchBar_placeholder: '検索',
   Nav_home: 'ホーム',
@@ -183,9 +211,15 @@ langMap.set(Languages.jap, {
   Footer_text: 'fekoneko, 2023',
   Footer_languageTooltip: '言語を変更',
   Footer_themeTooltip: 'テーマを変更',
+  Home_title: 'ホーム',
   Home_header: 'ホーム',
+  Search_title: '検索',
+  CreatePost_title: 'ポストを投稿',
   CreatePost_header: 'ポストを投稿',
+  EditPost_title: 'ポストを編集',
   EditPost_header: 'ポストを編集',
+  About_title: '情報',
+  Missing_title: 'ページが見つかりません',
   Missing_header: 'ページが見つかりません',
   Post_editTooltip: '編集',
   Post_deleteTooltip: '削除',
@@ -197,12 +231,14 @@ langMap.set(Languages.jap, {
   EditPostForm_contentLabel: '本文:',
   EditPostForm_contentPlaceholder: 'ここに書き始めてください…',
   EditPostForm_submit: '投稿する',
+  LogInModal_title: 'ログイン',
   LogInModal_header: 'ログイン',
   LogInModal_tip: 'まだアカウントがありませんか？',
   LogInModal_tipAction: 'ユーザー登録',
-  RegistrationModal_header: 'ユーザー登録',
-  RegistrationModal_tip: 'もうアカウントがありすか？',
-  RegistrationModal_tipAction: 'ログイン',
+  SignUpModal_title: 'ユーザー登録',
+  SignUpModal_header: 'ユーザー登録',
+  SignUpModal_tip: 'もうアカウントがありすか？',
+  SignUpModal_tipAction: 'ログイン',
   LogInForm_usernameLabel: 'ユーザー名：',
   LogInForm_usernamePlaceholder: 'ユーザー名を入力…',
   LogInForm_usernameHint: 'ユーザー名が間違っています！',

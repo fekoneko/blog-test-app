@@ -1,8 +1,9 @@
 import { MouseEvent, useContext } from 'react';
+import { Helmet } from 'react-helmet-async';
 import RegistrationForm from '../components/RegistrationForm';
 import { GlobalContext } from '../contexts/GlobalContext';
 
-const RegistrationModal = () => {
+const SignUpModal = () => {
   const { setSearchParams, langData } = useContext(GlobalContext);
 
   const handleTipAction = (e: MouseEvent): void => {
@@ -15,15 +16,19 @@ const RegistrationModal = () => {
 
   return (
     <>
-      <h1>{langData.RegistrationModal_header}</h1>
+      <Helmet>
+        <title>{`${langData.SignUpModal_title} - ${langData.SiteName}`}</title>
+      </Helmet>
+
+      <h1>{langData.SignUpModal_header}</h1>
       <RegistrationForm />
       <p>
-        {langData.RegistrationModal_tip}{' '}
+        {langData.SignUpModal_tip}{' '}
         <a href="#" onClick={handleTipAction}>
-          {langData.RegistrationModal_tipAction}
+          {langData.SignUpModal_tipAction}
         </a>
       </p>
     </>
   );
 };
-export default RegistrationModal;
+export default SignUpModal;

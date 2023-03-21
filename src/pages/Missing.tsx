@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { GlobalContext } from '../contexts/GlobalContext';
 
 const Missing = () => {
@@ -6,6 +7,10 @@ const Missing = () => {
 
   return (
     <main className="Missing" role="main">
+      <Helmet>
+        <title>{`${langData.Missing_title} - ${langData.SiteName}`}</title>
+      </Helmet>
+
       <h1>{langData.Missing_header}</h1>
     </main>
   );
