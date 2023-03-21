@@ -1,5 +1,5 @@
 import { useRef, useContext, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavigateFunction, useNavigate, useSearchParams } from 'react-router-dom';
 import { GlobalContext } from '../contexts/GlobalContext';
 import LogInModal from '../modals/LogInModal';
 import Modal, { ModalActions } from '../modals/Modal';
@@ -10,10 +10,12 @@ import { FaUserCircle } from 'react-icons/fa';
 type HeaderProps = {
   searchRequest: string;
   handleSearch: (request: string) => any;
+  navigate: NavigateFunction;
 };
 
-const Header = ({ searchRequest, handleSearch }: HeaderProps) => {
-  const { navigate, searchParams, setSearchParams, auth, langData } = useContext(GlobalContext);
+const Header = ({ searchRequest, handleSearch, navigate }: HeaderProps) => {
+  const { auth, langData } = useContext(GlobalContext);
+  const [searchParams, setSearchParams] = useSearchParams();
   const modalRef = useRef<ModalActions>(null);
   const [modalMode, setModalMode] = useState<'login' | 'register' | 'hidden'>('hidden');
 

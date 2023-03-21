@@ -1,10 +1,12 @@
 import { MouseEvent, useContext } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { useSearchParams } from 'react-router-dom';
 import LogInForm from '../components/LogInForm';
 import { GlobalContext } from '../contexts/GlobalContext';
 
 const LogInModal = () => {
-  const { setSearchParams, langData } = useContext(GlobalContext);
+  const { langData } = useContext(GlobalContext);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const handleTipAction = (e: MouseEvent): void => {
     e.preventDefault();

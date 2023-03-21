@@ -1,6 +1,6 @@
 import './styles/main.css';
 import { BASE_URL } from './scripts/constants';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate, useSearchParams } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import { Languages, PostInterface, Themes } from './scripts/interfaces';
 import {
@@ -26,7 +26,9 @@ function App() {
   const [posts, setPosts] = useState<PostInterface[]>([]);
   const [displayedPosts, setDisplayedPosts] = useState<PostInterface[]>(posts);
   const [searchRequest, setSearchRequest] = useState<string>('');
-  const { navigate, searchParams, settings } = useContext(GlobalContext);
+  const { settings } = useContext(GlobalContext);
+  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     updatePosts(setPosts);
@@ -105,7 +107,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header searchRequest={searchRequest} handleSearch={handleSearch} />
+      <Header searchRequest={searchRequest} handleSearch={handleSearch} navigate={navigate} />
       <Nav />
       <Routes>
         <Route

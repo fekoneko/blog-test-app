@@ -1,10 +1,11 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Location } from 'react-router-dom';
 import { useContext } from 'react';
 import { GlobalContext } from '../contexts/GlobalContext';
 
 const Nav = () => {
-  const { location, langData } = useContext(GlobalContext);
+  const { langData } = useContext(GlobalContext);
+  const location = useLocation();
 
   return (
     <nav className="Nav">
