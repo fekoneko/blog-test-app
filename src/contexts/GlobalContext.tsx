@@ -52,8 +52,8 @@ export const GlobalProvider = ({ children }: GlobalProviderProps) => {
         settings,
         setSettings,
         langData,
-        auth: auth,
-        setAuth: setAuth,
+        auth,
+        setAuth,
       }}
     >
       {children}

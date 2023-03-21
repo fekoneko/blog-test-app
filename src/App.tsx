@@ -2,7 +2,7 @@ import './styles/main.css';
 import { BASE_URL } from './scripts/constants';
 import { Route, Routes } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
-import { PostInterface, Themes } from './scripts/interfaces';
+import { Languages, PostInterface, Themes } from './scripts/interfaces';
 import {
   updatePosts,
   uploadPost,
@@ -20,6 +20,7 @@ import About from './pages/About';
 import Missing from './pages/Missing';
 import EditPost from './pages/EditPost';
 import { GlobalContext } from './contexts/GlobalContext';
+import { Helmet } from 'react-helmet';
 
 function App() {
   const [posts, setPosts] = useState<PostInterface[]>([]);
@@ -104,15 +105,6 @@ function App() {
 
   return (
     <div className="App">
-      <link
-        rel="stylesheet"
-        type="text/css"
-        href={
-          settings.theme === Themes.light
-            ? `${BASE_URL}themes/lightTheme.css`
-            : `${BASE_URL}themes/darkTheme.css`
-        }
-      />
       <Header searchRequest={searchRequest} handleSearch={handleSearch} />
       <Nav />
       <Routes>
@@ -144,6 +136,21 @@ function App() {
         <Route path="*" element={<Missing />} />
       </Routes>
       <Footer />
+
+      <Helmet>
+        {settings.theme === Themes.light ? (
+          <link rel="stylesheet" type="text/css" href={`${BASE_URL}themes/lightTheme.css`} />
+        ) : (
+          <link rel="stylesheet" type="text/css" href={`${BASE_URL}themes/darkTheme.css`} />
+        )}
+        {settings.language === Languages.rus ? (
+          <html lang="ru" />
+        ) : settings.language === Languages.jap ? (
+          <html lang="ja" />
+        ) : (
+          <html lang="en" />
+        )}
+      </Helmet>
     </div>
   );
 }

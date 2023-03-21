@@ -1,4 +1,7 @@
 @layer darkTheme {
+  :root {
+    color-scheme: dark;
+  }
   body {
     background-color: #282828;
     color: white;
