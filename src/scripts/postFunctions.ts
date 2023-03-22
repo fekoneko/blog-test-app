@@ -1,50 +1,90 @@
 import { PostInterface } from './interfaces';
-import { POSTS_API_NAME, apiGet, apiPost, apiDelete, apiPatch } from './api';
+import { POSTS_API_NAME, axiosPublic, axiosAuthRequired } from './api';
 
 export const findPostById = (posts: PostInterface[], id: number): PostInterface | undefined =>
   posts.find((post) => post.id === id);
 
+const validatePost = (post: object): PostInterface | null => {
+  const postTemplate: PostInterface = {
+    id: 1,
+    title: '',
+    content: '',
+    author: '',
+    publishTime: 0,
+    editTime: 0,
+  };
+  const optionalFields: string[] = ['editTime'];
+
+  const validPost: PostInterface = {} as PostInterface;
+  for (const field in postTemplate) {
+    if (field in post) {
+      if (
+        typeof post[field as keyof object] === typeof postTemplate[field as keyof PostInterface]
+      ) {
+        validPost[field as keyof PostInterface] = post[field as keyof object];
+      } else {
+        return null;
+      }
+    } else if (!optionalFields.includes(field)) {
+      return null;
+    }
+  }
+  return validPost;
+};
+
+const validatePosts = (posts: object[]): PostInterface[] => {
+  const validPosts: PostInterface[] = [];
+  posts.forEach((post) => {
+    const newValidPost = validatePost(post);
+    if (newValidPost) validPosts.push(newValidPost);
+  });
+  return validPosts;
+};
+
 export const updatePosts = async (
   setPosts: React.Dispatch<React.SetStateAction<PostInterface[]>>
 ): Promise<boolean> => {
-  const result = await apiGet(POSTS_API_NAME);
-  if (result === null) {
-    console.log('Post Load Error!'); // TODO: Display error on page
+  try {
+    const response = await axiosPublic.get(POSTS_API_NAME);
+    setPosts(validatePosts(response.data));
+    return true;
+  } catch (err) {
+    console.log(`Post Load Error: ${(err as Error).message}`); // TODO: Display error on page
     return false;
   }
-  setPosts(result);
-  return true;
 };
 
 export const uploadPost = async (
   setPosts: React.Dispatch<React.SetStateAction<PostInterface[]>>,
   newPost: PostInterface
 ): Promise<boolean> => {
-  const preparedPost: Partial<PostInterface> = newPost;
-  delete preparedPost.id;
-  delete preparedPost.publishTime;
-  if ('editTime' in preparedPost) delete preparedPost.editTime;
+  try {
+    const preparedPost: Partial<PostInterface> = newPost;
+    delete preparedPost.id;
+    delete preparedPost.publishTime;
+    if ('editTime' in preparedPost) delete preparedPost.editTime;
 
-  const result = await apiPost(POSTS_API_NAME, preparedPost);
-  if (result === null) {
-    console.log('Post Upload Error!'); // TODO: Display error on page
+    await axiosAuthRequired.post(POSTS_API_NAME, preparedPost);
+    await updatePosts(setPosts);
+    return true;
+  } catch (err) {
+    console.log(`Post Upload Error: ${(err as Error).message}`); // TODO: Display error on page
     return false;
   }
-  await updatePosts(setPosts);
-  return true;
 };
 
 export const deletePost = async (
   setPosts: React.Dispatch<React.SetStateAction<PostInterface[]>>,
   deleteId: number
 ): Promise<boolean> => {
-  const result = await apiDelete(POSTS_API_NAME, deleteId);
-  if (result === null) {
-    console.log('Post Upload Error!'); // TODO: Display error on page
+  try {
+    await axiosAuthRequired.delete(`${POSTS_API_NAME}/${deleteId}`);
+    await updatePosts(setPosts);
+    return true;
+  } catch (err) {
+    console.log(`Post Delete Error: ${(err as Error).message}`); // TODO: Display error on page
     return false;
   }
-  await updatePosts(setPosts);
-  return true;
 };
 
 const editPost = async (
@@ -52,17 +92,18 @@ const editPost = async (
   updatedFields: Partial<PostInterface>,
   editId: number
 ): Promise<boolean> => {
-  const preparedFields: Partial<PostInterface> = updatedFields;
-  delete preparedFields.id;
-  if ('editTime' in preparedFields) delete preparedFields.editTime;
+  try {
+    const preparedFields: Partial<PostInterface> = updatedFields;
+    delete preparedFields.id;
+    if ('editTime' in preparedFields) delete preparedFields.editTime;
 
-  const result = await apiPatch(POSTS_API_NAME, preparedFields, editId);
-  if (result === null) {
-    console.log('Post Upload Error!'); // TODO: Display error on page
+    await axiosAuthRequired.patch(`${POSTS_API_NAME}/${editId}`, preparedFields);
+    await updatePosts(setPosts);
+    return true;
+  } catch (err) {
+    console.log('Post Edit Error!'); // TODO: Display error on page
     return false;
   }
-  await updatePosts(setPosts);
-  return true;
 };
 
 export const compareAndEditPost = async (
